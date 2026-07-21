@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  html, body, #root {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Neue Haas Grotesk Display Pro 55 Roman', 'Neue Haas Grotesk Text Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #fcfdfc;
+    color: #1f2a1d;
+  }
+}
+
+/* Custom Subtle Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+/* Base Flying Off-Screen States */
+.card-fly-left {
+  opacity: 0;
+  transform: translate3d(-180px, 120px, -200px) rotate3d(1, -1, 0, 35deg) scale(0.75);
+}
+
+.card-fly-bottom {
+  opacity: 0;
+  transform: translate3d(0, 220px, -250px) rotate3d(1, 0, 0, 45deg) scale(0.7);
+}
+
+.card-fly-right {
+  opacity: 0;
+  transform: translate3d(180px, 120px, -200px) rotate3d(-1, 1, 0, -35deg) scale(0.75);
+}
+
+/* Landed State (Flight Completed) */
+.card-landed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate3d(0, 0, 0, 0deg) scale(1);
+}
