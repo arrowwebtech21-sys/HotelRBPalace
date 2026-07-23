@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent, type MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -25,6 +25,11 @@ export default function SuiteGalleryPage() {
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'details'>('overview');
 
+  // Zoom State
+  const [isHovered, setIsHovered] = useState(false);
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const [isPaused, setIsPaused] = useState(false);
+
   const room = ROOMS.find((r) => r.id === id) || ROOMS[0];
   const roomGallery = room.gallery && room.gallery.length > 0 ? room.gallery : [room.image];
 
@@ -39,6 +44,25 @@ export default function SuiteGalleryPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [id]);
+
+  // Automatic Rotation Timer (Rotates every 4s, pauses on hover)
+  useEffect(() => {
+    if (isPaused || roomGallery.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setActivePhotoIdx((prev) => (prev + 1) % roomGallery.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, roomGallery.length]);
+
+  // Hover Zoom Mouse Position Handler
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomPos({ x, y });
+  };
 
   const handleBookingSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -61,6 +85,7 @@ export default function SuiteGalleryPage() {
       className="w-full bg-[#fcfdfc] text-[#1f2a1d] min-h-screen flex flex-col justify-between selection:bg-[#85AB8B] selection:text-white"
     >
       <div className="flex-grow">
+        {/* Header */}
         <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-[#1f2a1d]/10 px-6 sm:px-12 py-4 flex items-center justify-between shadow-xs">
           <button
             onClick={() => {
@@ -85,6 +110,7 @@ export default function SuiteGalleryPage() {
           </a>
         </header>
 
+        {/* Hero Showcase */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -118,21 +144,45 @@ export default function SuiteGalleryPage() {
             </motion.div>
           </div>
 
-          <div className="rounded-[36px] overflow-hidden aspect-[16/9] max-h-[600px] bg-[#1f2a1d] relative shadow-2xl mb-6 group border border-[#1f2a1d]/10">
+          {/* MAIN IMAGE CANVAS WITH ULTRA-SUBTLE 1.15x ZOOM */}
+          <div
+            onMouseEnter={() => {
+              setIsHovered(true);
+              setIsPaused(true);
+            }}
+            onMouseLeave={() => {
+              setIsHovered(false);
+              setIsPaused(false);
+            }}
+            onMouseMove={handleMouseMove}
+            className="rounded-[36px] overflow-hidden aspect-[16/9] max-h-[600px] bg-[#1f2a1d] relative shadow-2xl mb-6 border border-[#1f2a1d]/10 cursor-crosshair group"
+          >
             <motion.img
               key={activePhotoIdx}
-              initial={{ opacity: 0.5, scale: 1.02 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0.6 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               src={roomGallery[activePhotoIdx] || room.image}
               alt={room.name}
+              style={{
+                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+                transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+                transition: isHovered ? 'transform 0.15s ease-out' : 'transform 0.4s ease-out'
+              }}
               className="w-full h-full object-cover"
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-10" />
 
-            <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-white/60 text-xs font-semibold text-[#1f2a1d] shadow-md flex items-center gap-2">
+            {/* Photo Counter Badge */}
+            <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-white/60 text-xs font-semibold text-[#1f2a1d] shadow-md flex items-center gap-2 pointer-events-none">
               <span className="w-2 h-2 rounded-full bg-[#85AB8B] animate-pulse" />
               Photo 0{activePhotoIdx + 1} / 0{roomGallery.length}
+            </div>
+
+            {/* Zoom Instruction Hint */}
+            <div className="absolute top-6 right-6 z-20 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-[11px] text-white font-medium pointer-events-none transition-opacity duration-300 opacity-90 group-hover:opacity-0">
+              Hover image to inspect • Auto-rotating
             </div>
 
             <div className="absolute bottom-6 left-6 right-6 z-20 flex items-center justify-between text-white pointer-events-none">
@@ -142,6 +192,7 @@ export default function SuiteGalleryPage() {
             </div>
           </div>
 
+          {/* BOTTOM THUMBNAILS ROW */}
           <div className="flex gap-4 overflow-x-auto pb-4 max-w-full scrollbar-thin">
             {roomGallery.map((imgUrl, idx) => (
               <button
@@ -168,6 +219,7 @@ export default function SuiteGalleryPage() {
             ))}
           </div>
 
+          {/* Spec Stat Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-3xl bg-[#f4f7f4] border border-[#1f2a1d]/10 mt-6 shadow-xs">
             <div className="flex items-center gap-3.5">
               <div className="p-3 rounded-2xl bg-white border border-[#1f2a1d]/10 text-[#336443]">
@@ -211,6 +263,7 @@ export default function SuiteGalleryPage() {
           </div>
         </motion.section>
 
+        {/* Information Grid */}
         <section className="max-w-7xl mx-auto px-6 sm:px-12 py-12 border-t border-[#1f2a1d]/10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-7 space-y-8">
@@ -321,6 +374,7 @@ export default function SuiteGalleryPage() {
               )}
             </div>
 
+            {/* Reservation Card */}
             <div className="lg:col-span-5">
               <div
                 id="room-booking"

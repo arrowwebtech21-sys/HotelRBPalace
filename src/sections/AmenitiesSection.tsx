@@ -68,13 +68,19 @@ function AmenityCard({
   desc: string;
 }) {
   return (
-    <div className="group relative bg-white p-8 rounded-3xl border border-[#1f2a1d]/10 shadow-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-xl hover:border-[#85AB8B]">
-      <div className="w-14 h-14 rounded-2xl bg-[#f4f7f4] group-hover:bg-[#336443] flex items-center justify-center mb-6 transition-colors duration-300">
+    <motion.div
+      whileHover={{ scale: 1.03, y: -8 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      className="group relative bg-white p-8 rounded-3xl border border-[#1f2a1d]/10 shadow-xs hover:shadow-2xl transition-all duration-300 hover:border-[#85AB8B]"
+    >
+      <div className="w-14 h-14 rounded-2xl bg-[#f4f7f4] group-hover:bg-[#336443] flex items-center justify-center mb-6 transition-colors duration-300 shadow-xs">
         <Icon className="w-7 h-7 text-[#336443] group-hover:text-white transition-colors duration-300" />
       </div>
-      <h3 className="font-semibold text-[#1f2a1d] text-lg mb-2">{title}</h3>
-      <p className="text-xs text-[#4b5b47] leading-relaxed">{desc}</p>
-    </div>
+      <h3 className="font-semibold text-[#1f2a1d] text-lg mb-2 group-hover:text-[#336443] transition-colors">
+        {title}
+      </h3>
+      <p className="text-xs text-[#4b5b47] leading-relaxed font-light">{desc}</p>
+    </motion.div>
   );
 }
 
@@ -85,22 +91,22 @@ export default function AmenitiesSection() {
     offset: ['start end', 'end start']
   });
 
-  const row1X = useTransform(amenitiesProgress, [0, 1], [-150, 100]);
-  const row2X = useTransform(amenitiesProgress, [0, 1], [150, -100]);
+  const row1X = useTransform(amenitiesProgress, [0, 1], [-120, 80]);
+  const row2X = useTransform(amenitiesProgress, [0, 1], [120, -80]);
 
   return (
     <section
       id="amenities"
       ref={amenitiesRef}
-      className="py-28 bg-[#f4f7f4] px-6 sm:px-12 overflow-hidden border-t border-[#1f2a1d]/10"
+      className="py-28 bg-[#f4f7f4] px-6 sm:px-12 overflow-hidden border-t border-[#1f2a1d]/10 relative"
     >
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-1.5 bg-white/80 px-3.5 py-1 rounded-full shadow-xs border border-[#1f2a1d]/5">
+          <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-1.5 bg-white/80 px-4 py-1.5 rounded-full shadow-xs border border-[#1f2a1d]/5">
             <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> World Class Standards
           </span>
           <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] mt-3">Curated Guest Amenities</h2>
-          <p className="text-[#4b5b47] text-sm sm:text-base mt-3 max-w-md mx-auto">
+          <p className="text-[#4b5b47] text-sm sm:text-base mt-3 max-w-md mx-auto font-light leading-relaxed">
             Every detail engineered to provide effortless comfort throughout your stay.
           </p>
         </div>
