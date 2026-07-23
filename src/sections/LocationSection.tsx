@@ -1,5 +1,6 @@
 import { Compass, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
 import Magnet from '../components/Magnet';
+import { HOTEL_ADDRESS, HOTEL_PHONE, MANAGER_EMAIL } from '../data/constants';
 
 export default function LocationSection() {
   return (
@@ -14,7 +15,7 @@ export default function LocationSection() {
         <div className="flex items-center justify-center md:justify-end gap-3">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1f2a1d]/5 border border-[#1f2a1d]/10 text-xs font-mono text-[#336443]">
             <span className="w-2 h-2 rounded-full bg-[#85AB8B] animate-ping" />
-            GPS: 37.7749° N, 122.4194° W
+            Jaipur, Rajasthan
           </span>
         </div>
       </div>
@@ -28,7 +29,7 @@ export default function LocationSection() {
             <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
               <div>
                 <p className="text-xs text-[#85AB8B] font-semibold uppercase tracking-widest">Resort Sanctuary</p>
-                <h3 className="text-2xl font-normal text-white mt-1">Coastal Reserve</h3>
+                <h3 className="text-2xl font-normal text-white mt-1">Hotel RB Palace</h3>
               </div>
               <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-[#85AB8B]">
                 <Compass className="w-6 h-6" />
@@ -48,26 +49,26 @@ export default function LocationSection() {
                 <div>
                   <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Address</p>
                   <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5 leading-snug">
-                    100 Paradise Cove Highway, Coastal Reserve, Bay Region, 90210
+                    {HOTEL_ADDRESS}
                   </p>
                 </div>
               </a>
 
               <a
-                href="tel:+18004567890"
+                href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
                 className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group/item"
               >
                 <div className="p-2.5 rounded-xl bg-[#85AB8B]/20 text-[#85AB8B] shrink-0 group-hover/item:bg-[#85AB8B] group-hover/item:text-[#1f2a1d] transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Concierge Direct</p>
-                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5">+1 (800) 456-7890</p>
+                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Front Desk & Enquiries</p>
+                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5">{HOTEL_PHONE}</p>
                 </div>
               </a>
 
               <a
-                href="mailto:concierge@auraresort.com"
+                href={`mailto:${MANAGER_EMAIL}`}
                 className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group/item"
               >
                 <div className="p-2.5 rounded-xl bg-[#85AB8B]/20 text-[#85AB8B] shrink-0 group-hover/item:bg-[#85AB8B] group-hover/item:text-[#1f2a1d] transition-colors">
@@ -75,21 +76,21 @@ export default function LocationSection() {
                 </div>
                 <div>
                   <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Inquiries</p>
-                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5">concierge@auraresort.com</p>
+                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5">{MANAGER_EMAIL}</p>
                 </div>
               </a>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
-                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Airport Shuttle</p>
-                <p className="text-base font-semibold text-white mt-1">25 Mins</p>
-                <p className="text-[10px] text-white/50">Private Chauffeur</p>
+                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Jaipur Airport</p>
+                <p className="text-base font-semibold text-white mt-1">45 Mins</p>
+                <p className="text-[10px] text-white/50">Via Delhi Road Highway</p>
               </div>
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
-                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Helipad Access</p>
-                <p className="text-base font-semibold text-white mt-1">On-Site</p>
-                <p className="text-[10px] text-white/50">Touchdown South Deck</p>
+                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Amer Fort</p>
+                <p className="text-base font-semibold text-white mt-1">15 Mins</p>
+                <p className="text-[10px] text-white/50">Nearby Heritage Sight</p>
               </div>
             </div>
           </div>
@@ -117,13 +118,13 @@ export default function LocationSection() {
               </span>
             </div>
             <p className="text-xs text-[#4b5b47] mt-2 leading-relaxed">
-              Follow North Gate highway exit 14. Private security reception desk open 24/7.
+              Located on Delhi Road Highway opposite Govt Sr Sec School, Kukas, Jaipur.
             </p>
           </div>
 
           <iframe
             title="Hotel Location Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0192842750383!2d-122.4194155!3d37.7749295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808580858085%3A0x8085808580858085!2sSan%20Francisco%20Bay!5e0!3m2!1sen!2sus!4v1650000000000!5m2!1sen!2sus"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14218.028688461017!2d75.8858!3d27.0253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDAxJzMxLjEiTiA3NcKwNTMnMDguOSJF!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
             className="w-full h-full border-0 min-h-[450px] filter grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0"
             loading="lazy"
           />

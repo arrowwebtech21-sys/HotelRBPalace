@@ -2,11 +2,11 @@ import { Menu, Phone, Sparkles, X, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import BoomerangVideoBg from '../components/BoomerangVideoBg';
 import Magnet from '../components/Magnet';
-import { BG_VIDEO, BRAND_NAME, BRAND_SUFFIX } from '../data/constants';
+import { BG_VIDEO, BRAND_NAME, BRAND_SUFFIX, HOTEL_PHONE } from '../data/constants';
 
 const navLinks = [
   { href: '#experience', label: 'Experience' },
-  { href: '#suites', label: 'Suites & Villas' },
+  { href: '#suites', label: 'Suites & Rooms' },
   { href: '#amenities', label: 'Amenities' },
   { href: '#location', label: 'Location' }
 ];
@@ -23,7 +23,7 @@ export default function HeroSection() {
         <div className="flex items-center gap-2">
           <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-white drop-shadow-md">
             {BRAND_NAME}
-            <span className="font-light text-[#85AB8B]">{BRAND_SUFFIX}</span>
+            <span className="font-light text-[#85AB8B]"> {BRAND_SUFFIX}</span>
           </span>
         </div>
 
@@ -50,11 +50,11 @@ export default function HeroSection() {
 
         <div className="flex items-center gap-4 text-white">
           <a
-            href="tel:+1234567890"
+            href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
             className="hidden sm:flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity bg-black/20 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full"
           >
             <Phone className="w-4 h-4 text-[#85AB8B]" />
-            +1 (800) 456-7890
+            {HOTEL_PHONE}
           </a>
           <button
             onClick={() => setMenuOpen((v) => !v)}
@@ -90,20 +90,20 @@ export default function HeroSection() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 pt-10 sm:pt-0">
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/30 text-white text-xs tracking-widest uppercase font-medium mb-6 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Coastal Luxury Sanctuary
+          <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Royal Heritage Experience
         </span>
         <h1 className="font-normal leading-[1.02] text-white text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] max-w-5xl tracking-tight drop-shadow-lg">
-          Sanctuary of <span className="text-[#85AB8B]">tranquility & timeless</span> elegance
+          Sanctuary of <span className="text-[#85AB8B]">tranquility & royal</span> elegance
         </h1>
         <p className="mt-6 text-white/90 text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-xl">
-          Disconnect from noise. Reconnect with nature in our private coastal villas and luxury heritage suites.
+          Experience timeless Rajasthani hospitality at Hotel RB Palace, Kukas, Jaipur.
         </p>
       </div>
 
       <div className="relative z-10 px-6 sm:px-10 md:px-14 pb-8 flex items-center justify-between">
         <div className="flex items-center gap-3 text-white/90">
           <Sparkles className="w-4 h-4 text-[#85AB8B]" />
-          <p className="text-xs text-white/80 font-light">Award-winning infinity pools & farm-to-table dining</p>
+          <p className="text-xs text-white/80 font-light">Luxury banquet halls & fine dining in Kukas, Jaipur</p>
         </div>
         <a
           href="#suites"

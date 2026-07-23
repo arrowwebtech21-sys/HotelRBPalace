@@ -3,93 +3,90 @@ import type { Room } from '../types/room';
 
 export const ROOMS: Room[] = [
   {
-    id: 'deluxe-suite',
-    name: 'Deluxe Heritage Suite',
-    tag: 'Mountain & Valley View',
-    price: '$280 / night',
-    size: '450 sq ft',
-    capacity: '2 Adults, 1 Child',
+    id: 'deluxe-room',
+    name: 'Deluxe Room',
+    tag: 'Mountain & Garden View',
+    price: '₹2,499 / night',
+    size: '350 sq ft',
+    capacity: '2 Guests',
     description:
-      'Immerse yourself in timeless luxury featuring private balcony views, hand-carved mahogany finishings, deep soaking tubs, and floor-to-ceiling glass paneling looking over the valley.',
+      'Designed for comfort and relaxation, our Deluxe Rooms offer stylish interiors, plush bedding, modern amenities, and a soothing ambiance perfect for business or leisure travelers.',
     amenities: [
-      'King-Sized Plush Bed',
-      'Private Balcony',
-      'High-Speed Wi-Fi 6',
-      'Complimentary Breakfast',
-      'Curated Mini Bar',
-      'Soaking Bathtub'
+      'King-Sized Bed',
+      'Air Conditioning',
+      'High-Speed Wi-Fi',
+      '24/7 Room Service',
+      'Ensuite Bathroom',
+      'LED Television'
     ],
-    image:
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200',
     gallery: [
       'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200'
     ],
     features: [
-      { icon: Sun, title: 'Sunrise Sightline', desc: 'Unobstructed mountain view facing east for golden hour watching.' },
-      { icon: Flower2, title: 'In-Suite Botanical Spa', desc: 'Freestanding bathtub accompanied by organic botanical bath oils.' },
-      { icon: ShieldCheck, title: 'Smart Touch Control', desc: 'Integrated ambient lighting, curtain, and climate control touchpads.' }
+      { icon: Sun, title: 'Scenic Mountain Sightlines', desc: 'Enjoy bright, natural daylight facing eastern hills.' },
+      { icon: Flower2, title: 'Modern Bath Amenities', desc: 'Premium bath fittings accompanied by organic toiletries.' },
+      { icon: ShieldCheck, title: 'In-Room Automation', desc: 'Integrated ambient lighting and touch climate controls.' }
     ]
   },
   {
-    id: 'panoramic-villa',
-    name: 'Panoramic Pool Villa',
-    tag: 'Private Infinity Plunge Pool',
-    price: '$520 / night',
-    size: '850 sq ft',
-    capacity: '4 Guests',
+    id: 'super-deluxe-room',
+    name: 'Super Deluxe Room',
+    tag: 'Luxury Heritage View',
+    price: '₹3,499 / night',
+    size: '480 sq ft',
+    capacity: '2 Adults, 1 Child',
     description:
-      'An exclusive private retreat featuring a temperature-controlled plunge pool, expanded outdoor dining deck, private fire pit, and 24/7 dedicated butler service.',
+      'Experience elevated luxury in our Super Deluxe Rooms featuring enhanced spatial layout, refined decor, expanded seating area, and royal service touches.',
     amenities: [
-      'Private Heated Pool',
-      'Personal Butler Service',
-      'Espresso Bar',
-      'Spa Marble Bathroom',
-      '24/7 In-Villa Dining',
-      'Private Cabana'
+      'King Royal Bed',
+      'Private Balcony',
+      'Tea & Coffee Maker',
+      'Complimentary Breakfast',
+      'Mini Refrigerator',
+      'Soaking Tub'
     ],
-    image:
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
     gallery: [
       'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200'
     ],
     features: [
-      { icon: Sun, title: 'Private Heated Plunge Pool', desc: 'Temperature controlled 24/7 with infinity edge horizon views.' },
-      { icon: ShieldCheck, title: 'Personal Butler Care', desc: 'Dedicated staff member for unpacking, reservations, and in-suite dining.' },
-      { icon: Wind, title: 'Outdoor Sunset Firepit', desc: 'Lounge around evening outdoor fireplace on custom teak furniture.' }
+      { icon: Sun, title: 'Panoramic Sunset View', desc: 'Extended balcony offering expansive horizon vistas.' },
+      { icon: ShieldCheck, title: 'Dedicated Service Line', desc: 'Fast-track concierge and in-room dining assistance.' },
+      { icon: Wind, title: 'Climate Comfort System', desc: 'Silent temperature control for optimum relaxation.' }
     ]
   },
   {
-    id: 'garden-sanctuary',
-    name: 'Garden Sanctuary Suite',
-    tag: 'Botanical Courtyard',
-    price: '$195 / night',
-    size: '380 sq ft',
-    capacity: '2 Guests',
+    id: 'royal-suite',
+    name: 'Royal Palace Suite',
+    tag: 'Panoramic Courtyard View',
+    price: '₹5,999 / night',
+    size: '750 sq ft',
+    capacity: '4 Guests',
     description:
-      'Tucked deep into lush resort flora, this suite offers private garden path access, organic linen bedding, custom aromatherapy diffusers, and an open outdoor rain shower.',
+      'The epitome of grandeur and comfort. Featuring separate living quarters, exquisite Rajasthani royal aesthetic, master bedroom suite, and VIP privileges.',
     amenities: [
-      'Private Garden Path',
-      'Outdoor Rainfall Shower',
-      'Organic Linens',
-      'Work Desk',
-      '4K Smart TV',
-      'Herbal Tea Station'
+      'Separate Living Salon',
+      'Personalized Butler Care',
+      'Marble Spa Bathroom',
+      '24/7 Premium Room Service',
+      'Welcome Drinks & Fruit Basket',
+      'Express Check-In'
     ],
-    image:
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
     gallery: [
       'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200'
     ],
     features: [
-      { icon: Wind, title: 'Enclosed Courtyard', desc: 'Enclosed stone terrace wrapped in tropical local flora.' },
-      { icon: Flower2, title: 'Open-Air Rainshower', desc: 'Open-air natural stone bathroom with tropical rainfall showerhead.' },
-      { icon: ShieldCheck, title: 'Aromatherapy Bar', desc: 'Custom essential oil blends refreshed twice daily by housekeeping.' }
+      { icon: Wind, title: 'Royal Living Lounge', desc: 'Spacious lounge equipped with plush heritage furniture.' },
+      { icon: Flower2, title: 'Luxury Tub & Rainshower', desc: 'Freestanding tub and dual tropical showerheads.' },
+      { icon: ShieldCheck, title: 'VIP Reception Care', desc: 'Priority booking for banquets and dining services.' }
     ]
   }
 ];
