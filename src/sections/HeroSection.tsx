@@ -4,11 +4,12 @@ import BoomerangVideoBg from '../components/BoomerangVideoBg';
 import Magnet from '../components/Magnet';
 import { BG_VIDEO, BRAND_NAME, BRAND_SUFFIX, HOTEL_PHONE } from '../data/constants';
 
-const navLinks = [
+const navLinksBeforeReserve = [
   { href: '#experience', label: 'Experience' },
-  { href: '#suites', label: 'Suites & Rooms' },
-  { href: '#amenities', label: 'Amenities' },
-  { href: '#location', label: 'Location' }
+  { href: '#corporate-clients', label: 'Clients' },
+  { href: '#suites', label: 'Suites & Tariffs' },
+  { href: '#booking-partners', label: 'OTA Partners' },
+  { href: '#amenities', label: 'Facilities' }
 ];
 
 export default function HeroSection() {
@@ -27,33 +28,43 @@ export default function HeroSection() {
           </span>
         </div>
 
-        <div className="hidden lg:flex items-center gap-2 bg-white/80 backdrop-blur-md rounded-full px-6 py-2 shadow-lg border border-white/40">
-          {navLinks.map((link) => (
+        {/* Floating Top Nav Pill (Ordered: Experience -> Clients -> Suites -> OTA Partners -> Facilities -> Reserve Stay -> Location) */}
+        <div className="hidden lg:flex items-center gap-1.5 bg-white/90 backdrop-blur-xl rounded-full px-5 py-2 shadow-xl border border-white/60">
+          {navLinksBeforeReserve.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm px-4 py-1.5 rounded-full font-medium text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-white/50 transition-all"
+              className="text-xs px-3.5 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4] transition-all whitespace-nowrap"
             >
               {link.label}
             </a>
           ))}
 
+          {/* Reserve Stay Button BEFORE Location */}
           <Magnet padding={80} strength={3}>
             <a
               href="#booking-form"
-              className="ml-3 bg-[#1f2a1d] hover:bg-[#2a3827] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all shadow-md hover:shadow-xl inline-block"
+              className="mx-1 bg-[#1f2a1d] hover:bg-[#2a3827] text-white text-xs font-semibold px-5 py-2 rounded-full transition-all shadow-md hover:shadow-xl inline-block whitespace-nowrap cursor-pointer"
             >
               Reserve Stay
             </a>
           </Magnet>
+
+          {/* Location link AFTER Reserve Stay */}
+          <a
+            href="#location"
+            className="text-xs px-3.5 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4] transition-all whitespace-nowrap"
+          >
+            Location
+          </a>
         </div>
 
         <div className="flex items-center gap-4 text-white">
           <a
             href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
-            className="hidden sm:flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity bg-black/20 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full"
+            className="hidden sm:flex items-center gap-2 text-xs font-semibold hover:opacity-80 transition-opacity bg-black/30 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full"
           >
-            <Phone className="w-4 h-4 text-[#85AB8B]" />
+            <Phone className="w-3.5 h-3.5 text-[#85AB8B]" />
             {HOTEL_PHONE}
           </a>
           <button
@@ -67,8 +78,8 @@ export default function HeroSection() {
       </nav>
 
       {menuOpen && (
-        <div className="lg:hidden absolute top-24 left-6 right-6 z-40 bg-white/95 backdrop-blur-xl rounded-3xl border border-white/60 shadow-2xl p-6 flex flex-col gap-3">
-          {navLinks.map((link) => (
+        <div className="lg:hidden absolute top-24 left-6 right-6 z-40 bg-white/95 backdrop-blur-xl rounded-3xl border border-white/60 shadow-2xl p-6 flex flex-col gap-2">
+          {navLinksBeforeReserve.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -81,9 +92,16 @@ export default function HeroSection() {
           <a
             href="#booking-form"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 bg-[#1f2a1d] text-white text-sm font-semibold px-4 py-3 rounded-full text-center"
+            className="my-1 bg-[#1f2a1d] text-white text-sm font-semibold px-4 py-3 rounded-full text-center"
           >
             Reserve Stay
+          </a>
+          <a
+            href="#location"
+            onClick={() => setMenuOpen(false)}
+            className="text-sm font-medium text-[#1f2a1d] px-4 py-3 rounded-2xl hover:bg-[#f4f7f4]"
+          >
+            Location
           </a>
         </div>
       )}
@@ -96,14 +114,14 @@ export default function HeroSection() {
           Sanctuary of <span className="text-[#85AB8B]">tranquility & royal</span> elegance
         </h1>
         <p className="mt-6 text-white/90 text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-xl">
-          Experience timeless Rajasthani hospitality at Hotel RB Palace, Kukas, Jaipur.
+          Experience timeless Rajasthani hospitality at Hotel RB Palace, Dholpur, Rajasthan.
         </p>
       </div>
 
       <div className="relative z-10 px-6 sm:px-10 md:px-14 pb-8 flex items-center justify-between">
         <div className="flex items-center gap-3 text-white/90">
           <Sparkles className="w-4 h-4 text-[#85AB8B]" />
-          <p className="text-xs text-white/80 font-light">Luxury banquet halls & fine dining in Kukas, Jaipur</p>
+          <p className="text-xs text-white/80 font-light">Banquet halls (100–150 Pax), Oriental dining & 24/7 power in Dholpur, Rajasthan</p>
         </div>
         <a
           href="#suites"

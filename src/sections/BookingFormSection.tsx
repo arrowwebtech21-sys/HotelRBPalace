@@ -1,5 +1,5 @@
 import type { ChangeEvent, FormEvent } from 'react';
-import { Calendar, Send } from 'lucide-react';
+import { Calendar, Send, Utensils } from 'lucide-react';
 import Magnet from '../components/Magnet';
 import { ROOMS } from '../data/rooms';
 
@@ -12,6 +12,7 @@ export type LandingBookingForm = {
   guests: string;
   roomsCount: string;
   roomId: string;
+  planId: string;
   specialRequests: string;
 };
 
@@ -22,14 +23,23 @@ type BookingFormSectionProps = {
 };
 
 export default function BookingFormSection({ formData, onChange, onSubmit }: BookingFormSectionProps) {
+  const selectedRoom = ROOMS.find((r) => r.id === formData.roomId) || ROOMS[0];
+  const roomPlans = selectedRoom.plans || [];
+
   return (
     <section id="booking-form" className="py-24 px-6 sm:px-12 max-w-5xl mx-auto">
       <div className="bg-[#1f2a1d] text-white rounded-3xl p-8 sm:p-12 md:p-14 shadow-2xl relative overflow-hidden border border-white/10">
-        <span className="text-[#85AB8B] font-semibold text-xs uppercase tracking-widest">Direct Booking Enquiry</span>
-        <h2 className="text-3xl sm:text-4xl font-normal mt-2 mb-3">Plan Your Exceptional Stay</h2>
-        <p className="text-white/70 text-base max-w-xl mb-10">
-          Fill out your preferred schedule below. Our reservation team will review availability and confirm your stay
-          instantly.
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
+          <div>
+            <span className="text-[#85AB8B] font-semibold text-xs uppercase tracking-widest block mb-1">Direct Reservation Inquiry</span>
+            <h2 className="text-3xl sm:text-4xl font-normal text-white">Plan Your Exceptional Stay</h2>
+          </div>
+          <div className="px-4 py-2 rounded-2xl bg-white/10 border border-white/15 text-xs text-[#85AB8B] font-medium shrink-0">
+            Check-In: 1:00 PM • Check-Out: 12:00 PM
+          </div>
+        </div>
+        <p className="text-white/70 text-sm max-w-xl mb-8 font-light leading-relaxed">
+          Select your accommodation and preferred meal plan. Our reservation team at Hotel RB Palace Dholpur will process your booking immediately.
         </p>
 
         <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -65,7 +75,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
               type="tel"
               name="phone"
               required
-              placeholder="+1 (555) 000-0000"
+              placeholder="+91 98765 00000"
               value={formData.phone}
               onChange={onChange}
               className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#85AB8B]"
@@ -103,7 +113,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-white/80 uppercase mb-2">Select Suite/Villa</label>
+            <label className="block text-xs font-medium text-white/80 uppercase mb-2">Select Suite/Room Category</label>
             <select
               name="roomId"
               value={formData.roomId}
@@ -112,7 +122,26 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
             >
               {ROOMS.map((r) => (
                 <option key={r.id} value={r.id}>
-                  {r.name}
+                  {r.name} ({r.startingPrice})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* DYNAMIC MEAL & OCCUPANCY PLAN SELECTION */}
+          <div className="sm:col-span-2 md:col-span-3">
+            <label className="block text-xs font-medium text-white/80 uppercase mb-2 flex items-center gap-1.5">
+              <Utensils className="w-3.5 h-3.5 text-[#85AB8B]" /> Select Tariff & Meal Plan ({roomPlans.length} Available)
+            </label>
+            <select
+              name="planId"
+              value={formData.planId || roomPlans[0]?.id || ''}
+              onChange={onChange}
+              className="w-full bg-[#2d3a2a] border border-white/20 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#85AB8B]"
+            >
+              {roomPlans.map((plan) => (
+                <option key={plan.id} value={plan.id}>
+                  [{plan.code}] {plan.title} — {plan.price}
                 </option>
               ))}
             </select>
@@ -131,7 +160,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
           </div>
 
           <div className="sm:col-span-2 md:col-span-3 mt-4 flex items-center justify-between">
-            <p className="text-xs text-white/60">⚡ Instant direct quote emailed to you.</p>
+            <p className="text-xs text-white/60">⚡ Instant direct quote emailed to resort reservations.</p>
 
             <Magnet padding={60} strength={2}>
               <button

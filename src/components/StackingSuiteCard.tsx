@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, type MotionValue, useTransform } from 'framer-motion';
-import { CheckCircle2, Maximize2, Sparkles } from 'lucide-react';
+import { CheckCircle2, Maximize2, Sparkles, Utensils } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import type { Room } from '../types/room';
 
@@ -40,6 +40,8 @@ export default function StackingSuiteCard({
     setRotateY(0);
   };
 
+  const planCount = room.plans?.length || 1;
+
   return (
     <div
       className="sticky top-24 md:top-32 h-[80vh] flex items-center justify-center mb-10 pointer-events-auto z-10 perspective-1200"
@@ -61,7 +63,7 @@ export default function StackingSuiteCard({
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
+
           <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold text-[#1f2a1d] shadow-sm flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> {room.tag}
           </span>
@@ -74,15 +76,23 @@ export default function StackingSuiteCard({
               <span className="text-xs font-bold uppercase tracking-widest text-[#85AB8B] bg-[#f4f7f4] px-3 py-1 rounded-full border border-[#1f2a1d]/5">
                 0{index + 1} / 0{totalCards}
               </span>
-              <span className="text-xl font-bold text-[#336443] bg-white border border-[#1f2a1d]/10 px-4 py-1.5 rounded-2xl shadow-xs">
-                {room.price}
-              </span>
+              <div className="text-right">
+                <span className="text-xl font-bold text-[#336443] bg-white border border-[#1f2a1d]/10 px-4 py-1.5 rounded-2xl shadow-xs block">
+                  {room.price}
+                </span>
+              </div>
             </div>
-            
-            <h3 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] mb-4 group-hover:text-[#336443] transition-colors duration-300">
+
+            <h3 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] mb-2 group-hover:text-[#336443] transition-colors duration-300">
               {room.name}
             </h3>
-            <p className="text-sm sm:text-base text-[#4b5b47] leading-relaxed mb-6 font-light">
+
+            {/* MEAL PLANS BADGE */}
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#336443] bg-[#f4f7f4] px-3 py-1 rounded-full border border-[#1f2a1d]/5 mb-4">
+              <Utensils className="w-3 h-3 text-[#85AB8B]" /> {planCount} Tariff Plan{planCount > 1 ? 's' : ''} (EP, CP, MAP)
+            </div>
+
+            <p className="text-sm sm:text-base text-[#4b5b47] leading-relaxed mb-4 font-light line-clamp-2">
               {room.description}
             </p>
 
@@ -108,7 +118,7 @@ export default function StackingSuiteCard({
                 }}
                 className="py-3 px-5 rounded-2xl border border-[#1f2a1d]/20 text-[#1f2a1d] text-xs font-semibold hover:bg-gray-100 hover:border-[#336443] transition-all flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95"
               >
-                <Maximize2 className="w-3.5 h-3.5 text-[#336443]" /> Gallery
+                <Maximize2 className="w-3.5 h-3.5 text-[#336443]" /> View Plans & Gallery
               </button>
               <a
                 href="#booking-form"

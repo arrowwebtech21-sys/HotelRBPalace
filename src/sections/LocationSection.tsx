@@ -3,6 +3,14 @@ import Magnet from '../components/Magnet';
 import { HOTEL_ADDRESS, HOTEL_PHONE, MANAGER_EMAIL } from '../data/constants';
 
 export default function LocationSection() {
+  const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    'Hotel RB Palace Near chopra mode Bus stand NH-3 Highway Dholpur Rajasthan 328001'
+  )}`;
+
+  const mapsEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
+    'Hotel RB Palace Near chopra mode Bus stand NH-3 Highway Dholpur Rajasthan 328001'
+  )}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+
   return (
     <section id="location" className="py-28 px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden">
       <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -15,7 +23,7 @@ export default function LocationSection() {
         <div className="flex items-center justify-center md:justify-end gap-3">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1f2a1d]/5 border border-[#1f2a1d]/10 text-xs font-mono text-[#336443]">
             <span className="w-2 h-2 rounded-full bg-[#85AB8B] animate-ping" />
-            Jaipur, Rajasthan
+            Dholpur, Rajasthan (Pin: 328001)
           </span>
         </div>
       </div>
@@ -38,7 +46,7 @@ export default function LocationSection() {
 
             <div className="space-y-4 mb-8">
               <a
-                href="https://maps.google.com"
+                href={mapsSearchUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group/item"
@@ -47,7 +55,7 @@ export default function LocationSection() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Address</p>
+                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Exact Location Address</p>
                   <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5 leading-snug">
                     {HOTEL_ADDRESS}
                   </p>
@@ -83,14 +91,14 @@ export default function LocationSection() {
 
             <div className="grid grid-cols-2 gap-3 pt-2">
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
-                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Jaipur Airport</p>
-                <p className="text-base font-semibold text-white mt-1">45 Mins</p>
-                <p className="text-[10px] text-white/50">Via Delhi Road Highway</p>
+                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Dholpur Junction</p>
+                <p className="text-base font-semibold text-white mt-1">10 Mins</p>
+                <p className="text-[10px] text-white/50">Near Bus Stand / NH-3</p>
               </div>
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
-                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Amer Fort</p>
-                <p className="text-base font-semibold text-white mt-1">15 Mins</p>
-                <p className="text-[10px] text-white/50">Nearby Heritage Sight</p>
+                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Gwalior Airport</p>
+                <p className="text-base font-semibold text-white mt-1">55 Mins</p>
+                <p className="text-[10px] text-white/50">Via NH-3 Highway</p>
               </div>
             </div>
           </div>
@@ -98,12 +106,12 @@ export default function LocationSection() {
           <div className="relative z-10 pt-8 mt-8 border-t border-white/10">
             <Magnet padding={60} strength={2}>
               <a
-                href="https://maps.google.com"
+                href={mapsSearchUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-xs py-4 px-6 rounded-full flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-2xl cursor-pointer"
               >
-                <MapPin className="w-4 h-4" /> Open in Google Maps
+                <MapPin className="w-4 h-4" /> Open Dholpur NH-3 in Google Maps
               </a>
             </Magnet>
           </div>
@@ -114,17 +122,17 @@ export default function LocationSection() {
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-[#336443] animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-wider text-[#1f2a1d]">
-                Valet & Check-In Entrance
+                Hotel RB Palace Entrance
               </span>
             </div>
             <p className="text-xs text-[#4b5b47] mt-2 leading-relaxed">
-              Located on Delhi Road Highway opposite Govt Sr Sec School, Kukas, Jaipur.
+              Near chopra mode, Bus stand, On NH-3 Highway, Dholpur, Rajasthan 328001.
             </p>
           </div>
 
           <iframe
-            title="Hotel Location Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14218.028688461017!2d75.8858!3d27.0253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDAxJzMxLjEiTiA3NcKwNTMnMDguOSJF!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
+            title="Hotel RB Palace Dholpur Location Map"
+            src={mapsEmbedUrl}
             className="w-full h-full border-0 min-h-[450px] filter grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0"
             loading="lazy"
           />

@@ -7,4 +7,7 @@ export const BRAND_NAME = 'HOTEL RB';
 export const BRAND_SUFFIX = 'PALACE';
 
 export const HOTEL_PHONE = '+91 9119119101';
-export const HOTEL_ADDRESS = 'Opp. Govt. Sr. Sec. School, Delhi Road, Highway, Kukas, Jaipur, Rajasthan 302028';
+export const HOTEL_ADDRESS = 'Near chopra mode, Bus stand, On NH-3 Highway, Dholpur, Rajasthan 328001';
+
+export const CHECK_IN_TIME = '1:00 PM';
+export const CHECK_OUT_TIME = '12:00 PM';
