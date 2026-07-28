@@ -16,6 +16,7 @@ import {
   Tag,
   User,
   Mail,
+  Phone,
   Calendar,
   MessageSquare
 } from 'lucide-react';
@@ -563,9 +564,10 @@ export default function SuiteGalleryPage() {
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
-                        Phone / WhatsApp
+                    {/* Phone / WhatsApp */}
+                    <div className="space-y-1.5">
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                        <Phone className="w-3.5 h-3.5 text-[#85AB8B]" /> Phone / WhatsApp
                       </label>
                       <input
                         type="tel"
@@ -573,7 +575,7 @@ export default function SuiteGalleryPage() {
                         placeholder="+91 98765 00000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] transition-all"
+                        className="w-full bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] focus:bg-white/10 transition-all"
                       />
                     </div>
 
