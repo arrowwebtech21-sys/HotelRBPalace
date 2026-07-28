@@ -7,20 +7,20 @@ import {
   Eye,
   Info,
   Layers,
+  Loader2,
   Maximize,
   Send,
-  Sparkle,
   Sparkles,
   Users,
-  Utensils,
-  Tag
+  Utensils
 } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
 import Magnet from '../components/Magnet';
+import ThankYouModal from '../components/ThankYouModal';
 import { BRAND_NAME, BRAND_SUFFIX, CHECK_IN_TIME, CHECK_OUT_TIME } from '../data/constants';
 import { ROOMS } from '../data/rooms';
-import { openBookingMailto } from '../utils/booking';
+import { sendBookingEnquiry, getTodayString, getNextDayString, type BookingEnquiry } from '../utils/booking';
 
 export default function SuiteGalleryPage() {
   const { id } = useParams<{ id: string }>();
@@ -39,16 +39,20 @@ export default function SuiteGalleryPage() {
 
   // Selected Meal Plan state
   const [selectedPlanId, setSelectedPlanId] = useState<string>(roomPlans[0]?.id || '');
-
   const selectedPlan = roomPlans.find((p) => p.id === selectedPlanId) || roomPlans[0];
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     checkIn: '',
     checkOut: '',
     specialRequests: ''
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isThankYouOpen, setIsThankYouOpen] = useState(false);
+  const [submittedEnquiry, setSubmittedEnquiry] = useState<BookingEnquiry | null>(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -76,18 +80,28 @@ export default function SuiteGalleryPage() {
     setZoomPos({ x, y });
   };
 
-  const handleBookingSubmit = (e: FormEvent) => {
+  const handleBookingSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    openBookingMailto({
+    setIsSubmitting(true);
+
+    const enquiryPayload: BookingEnquiry = {
       name: formData.name,
       email: formData.email,
+      phone: formData.phone,
       roomName: room.name,
       selectedPlanTitle: selectedPlan?.title,
       planPrice: selectedPlan?.price,
       checkIn: formData.checkIn,
       checkOut: formData.checkOut,
       specialRequests: formData.specialRequests
-    });
+    };
+
+    setSubmittedEnquiry(enquiryPayload);
+    await sendBookingEnquiry(enquiryPayload);
+
+    setIsSubmitting(false);
+    setIsThankYouOpen(true);
+    setFormData({ name: '', email: '', phone: '', checkIn: '', checkOut: '', specialRequests: '' });
   };
 
   return (
@@ -162,7 +176,7 @@ export default function SuiteGalleryPage() {
                 {selectedPlan?.price || room.price}
               </span>
               <p className="text-xs text-[#4b5b47] mt-1 uppercase tracking-wider font-semibold">
-                {selectedPlan?.title || 'Includes Dedicated Butler & Premium Inclusions'}
+                {selectedPlan?.title || 'Includes Premium Amenities & 24hr Hot Water'}
               </p>
             </motion.div>
           </div>
@@ -208,191 +222,168 @@ export default function SuiteGalleryPage() {
               Hover image to inspect • Auto-rotating
             </div>
 
-            <div className="absolute bottom-6 left-6 right-6 z-20 flex items-center justify-between text-white pointer-events-none">
-              <span className="text-xs font-medium bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                Architectural Viewpoint 0{activePhotoIdx + 1}
+            {/* Caption Bar */}
+            <div className="absolute bottom-6 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
+              <span className="text-white text-xs font-medium bg-black/40 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full">
+                {room.name} — Interactive Gallery Showcase
+              </span>
+              <span className="text-xs text-white/80 font-mono hidden sm:inline-block bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                1.15x Precision Lens
               </span>
             </div>
           </div>
 
-          {/* BOTTOM THUMBNAILS ROW */}
-          <div className="flex gap-4 overflow-x-auto pb-4 max-w-full scrollbar-thin">
-            {roomGallery.map((imgUrl, idx) => (
-              <button
-                key={imgUrl}
-                type="button"
-                onClick={() => setActivePhotoIdx(idx)}
-                className={`relative rounded-2xl overflow-hidden w-36 sm:w-44 aspect-[16/10] shrink-0 border-2 transition-all duration-300 cursor-pointer group ${
-                  activePhotoIdx === idx
-                    ? 'border-[#336443] scale-105 shadow-xl ring-4 ring-[#85AB8B]/30'
-                    : 'border-transparent opacity-65 hover:opacity-100 hover:scale-102'
-                }`}
-              >
-                <img
-                  src={imgUrl}
-                  alt={`Thumbnail ${idx + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div
-                  className={`absolute inset-0 bg-black/20 transition-opacity ${
-                    activePhotoIdx === idx ? 'opacity-0' : 'opacity-100'
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
-
-          {/* Spec Stat Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-3xl bg-[#f4f7f4] border border-[#1f2a1d]/10 mt-6 shadow-xs">
-            <div className="flex items-center gap-3.5">
-              <div className="p-3 rounded-2xl bg-white border border-[#1f2a1d]/10 text-[#336443]">
-                <Maximize className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[10px] text-[#4b5b47] uppercase tracking-wider font-semibold">Suite Footprint</p>
-                <p className="text-sm font-bold text-[#1f2a1d]">{room.size}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3.5">
-              <div className="p-3 rounded-2xl bg-white border border-[#1f2a1d]/10 text-[#336443]">
-                <Users className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[10px] text-[#4b5b47] uppercase tracking-wider font-semibold">Max Guests</p>
-                <p className="text-sm font-bold text-[#1f2a1d]">{room.capacity}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3.5">
-              <div className="p-3 rounded-2xl bg-white border border-[#1f2a1d]/10 text-[#336443]">
-                <Eye className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[10px] text-[#4b5b47] uppercase tracking-wider font-semibold">View Perspective</p>
-                <p className="text-sm font-bold text-[#1f2a1d]">Panoramic Horizon</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3.5">
-              <div className="p-3 rounded-2xl bg-white border border-[#1f2a1d]/10 text-[#336443]">
-                <Bed className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[10px] text-[#4b5b47] uppercase tracking-wider font-semibold">Bed Configuration</p>
-                <p className="text-sm font-bold text-[#1f2a1d]">King Plush Mattress</p>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Information & Tariff Plans Grid */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-12 py-12 border-t border-[#1f2a1d]/10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-7 space-y-8">
-              <div className="flex items-center gap-2 bg-[#f4f7f4] p-1.5 rounded-2xl border border-[#1f2a1d]/10 overflow-x-auto scrollbar-none">
+          {/* Photo Thumbnails Row */}
+          {roomGallery.length > 1 && (
+            <div className="flex items-center gap-4 overflow-x-auto pb-4 pt-2">
+              {roomGallery.map((imgUrl, idx) => (
                 <button
-                  onClick={() => setActiveTab('plans')}
-                  className={`flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                    activeTab === 'plans'
-                      ? 'bg-white text-[#1f2a1d] shadow-sm'
-                      : 'text-[#4b5b47] hover:text-[#1f2a1d]'
+                  key={imgUrl}
+                  onClick={() => {
+                    setActivePhotoIdx(idx);
+                    setIsPaused(true);
+                  }}
+                  className={`relative shrink-0 rounded-2xl overflow-hidden aspect-[4/3] w-28 sm:w-36 transition-all duration-300 border-2 cursor-pointer ${
+                    activePhotoIdx === idx
+                      ? 'border-[#336443] shadow-lg scale-105'
+                      : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
                   }`}
                 >
-                  <Tag className="w-3.5 h-3.5 text-[#336443]" /> Tariff Plans ({roomPlans.length})
+                  <img src={imgUrl} alt={`${room.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                  {activePhotoIdx === idx && (
+                    <div className="absolute inset-0 bg-[#336443]/20 flex items-center justify-center">
+                      <div className="w-3 h-3 rounded-full bg-white shadow-md" />
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+        </motion.section>
+
+        {/* Spec Stat Bar */}
+        <section className="bg-[#f4f7f4] border-y border-[#1f2a1d]/10 py-6 mb-12">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <Maximize className="w-5 h-5 text-[#336443] mb-1" />
+              <span className="text-xs text-[#4b5b47] uppercase tracking-wider font-semibold">Total Area</span>
+              <span className="text-sm font-bold text-[#1f2a1d] mt-0.5">{room.size}</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Users className="w-5 h-5 text-[#336443] mb-1" />
+              <span className="text-xs text-[#4b5b47] uppercase tracking-wider font-semibold">Capacity</span>
+              <span className="text-sm font-bold text-[#1f2a1d] mt-0.5">{room.capacity}</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Bed className="w-5 h-5 text-[#336443] mb-1" />
+              <span className="text-xs text-[#4b5b47] uppercase tracking-wider font-semibold">Bed Configuration</span>
+              <span className="text-sm font-bold text-[#1f2a1d] mt-0.5">King Size Bed</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Eye className="w-5 h-5 text-[#336443] mb-1" />
+              <span className="text-xs text-[#4b5b47] uppercase tracking-wider font-semibold">View</span>
+              <span className="text-sm font-bold text-[#1f2a1d] mt-0.5">{room.tag}</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Tabbed Info & Reservation Section */}
+        <section className="max-w-7xl mx-auto px-6 sm:px-12 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Main Tab Content */}
+            <div className="lg:col-span-7">
+              {/* Tab Selector */}
+              <div className="flex items-center gap-2 border-b border-[#1f2a1d]/10 pb-4 mb-8 overflow-x-auto">
+                <button
+                  onClick={() => setActiveTab('plans')}
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                    activeTab === 'plans'
+                      ? 'bg-[#1f2a1d] text-white shadow-md'
+                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
+                  }`}
+                >
+                  Tariff & Meal Plans ({roomPlans.length})
                 </button>
                 <button
                   onClick={() => setActiveTab('overview')}
-                  className={`flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                     activeTab === 'overview'
-                      ? 'bg-white text-[#1f2a1d] shadow-sm'
-                      : 'text-[#4b5b47] hover:text-[#1f2a1d]'
+                      ? 'bg-[#1f2a1d] text-white shadow-md'
+                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                   }`}
                 >
-                  <Info className="w-3.5 h-3.5 text-[#336443]" /> Overview
+                  Overview & Layout
                 </button>
                 <button
                   onClick={() => setActiveTab('features')}
-                  className={`flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                     activeTab === 'features'
-                      ? 'bg-white text-[#1f2a1d] shadow-sm'
-                      : 'text-[#4b5b47] hover:text-[#1f2a1d]'
+                      ? 'bg-[#1f2a1d] text-white shadow-md'
+                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                   }`}
                 >
-                  <Sparkle className="w-3.5 h-3.5 text-[#336443]" /> Highlights
+                  Room Highlights
                 </button>
                 <button
                   onClick={() => setActiveTab('details')}
-                  className={`flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                     activeTab === 'details'
-                      ? 'bg-white text-[#1f2a1d] shadow-sm'
-                      : 'text-[#4b5b47] hover:text-[#1f2a1d]'
+                      ? 'bg-[#1f2a1d] text-white shadow-md'
+                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                   }`}
                 >
-                  <Layers className="w-3.5 h-3.5 text-[#336443]" /> Privileges
+                  Privileges & Policy
                 </button>
               </div>
 
-              {/* TARIFF MEAL PLANS TAB */}
+              {/* Tab 1: Tariff & Meal Plans */}
               {activeTab === 'plans' && (
                 <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
                   className="space-y-4"
                 >
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="bg-[#f4f7f4] p-4 rounded-2xl border border-[#1f2a1d]/10 mb-6 flex items-center justify-between">
                     <div>
-                      <h2 className="text-2xl font-normal text-[#1f2a1d]">Available Tariff & Meal Plans</h2>
-                      <p className="text-xs text-[#4b5b47] mt-1">
-                        Select a plan below to view rate breakdown and pre-fill your reservation quote.
-                      </p>
+                      <h4 className="font-semibold text-sm text-[#1f2a1d]">Available Tariff & Meal Plan Options</h4>
+                      <p className="text-xs text-[#4b5b47] mt-0.5">Select a plan below to calculate your reservation total.</p>
                     </div>
+                    <Utensils className="w-5 h-5 text-[#336443]" />
                   </div>
 
-                  <div className="space-y-3.5">
+                  <div className="grid grid-cols-1 gap-3">
                     {roomPlans.map((plan) => {
-                      const isSelected = selectedPlanId === plan.id;
+                      const isSelected = plan.id === selectedPlanId;
                       return (
                         <div
                           key={plan.id}
                           onClick={() => setSelectedPlanId(plan.id)}
-                          className={`p-5 rounded-3xl border transition-all duration-300 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+                          className={`p-5 rounded-3xl border transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                             isSelected
-                              ? 'bg-white border-[#336443] shadow-lg ring-2 ring-[#85AB8B]/40 translate-x-1'
-                              : 'bg-[#f4f7f4]/70 border-[#1f2a1d]/10 hover:bg-white hover:border-[#85AB8B]'
+                              ? 'bg-white border-[#336443] shadow-lg ring-2 ring-[#336443]/20'
+                              : 'bg-white/60 border-[#1f2a1d]/10 hover:border-[#85AB8B] hover:bg-white'
                           }`}
                         >
-                          <div className="flex items-start gap-3.5">
-                            <span
-                              className={`text-xs font-bold px-3 py-1 rounded-full uppercase shrink-0 mt-0.5 ${
-                                plan.code === 'EP'
-                                  ? 'bg-blue-100 text-blue-800 border border-blue-200'
-                                  : plan.code === 'CP'
-                                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
-                                  : 'bg-amber-100 text-amber-800 border border-amber-200'
-                              }`}
-                            >
-                              {plan.code} PLAN
-                            </span>
+                          <div className="flex items-start gap-3">
+                            <div className={`p-2 rounded-xl mt-0.5 ${isSelected ? 'bg-[#336443] text-white' : 'bg-[#f4f7f4] text-[#336443]'}`}>
+                              <Utensils className="w-4 h-4" />
+                            </div>
                             <div>
-                              <h4 className="font-semibold text-sm text-[#1f2a1d]">{plan.title}</h4>
-                              <p className="text-xs text-[#4b5b47] mt-1 flex items-center gap-2">
-                                <Utensils className="w-3.5 h-3.5 text-[#336443]" /> {plan.description}
-                              </p>
+                              <div className="flex items-center gap-2">
+                                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase ${isSelected ? 'bg-[#336443] text-white' : 'bg-[#f4f7f4] text-[#1f2a1d]'}`}>
+                                  {plan.code} PLAN
+                                </span>
+                                <span className="text-xs font-semibold text-[#1f2a1d]">{plan.occupancy}</span>
+                              </div>
+                              <h4 className="font-semibold text-sm text-[#1f2a1d] mt-1">{plan.title}</h4>
+                              <p className="text-xs text-[#4b5b47] mt-0.5">{plan.description}</p>
                             </div>
                           </div>
-
-                          <div className="text-right sm:text-right shrink-0 flex items-center justify-between sm:flex-col sm:items-end border-t sm:border-t-0 pt-2 sm:pt-0 border-gray-200">
-                            <span className="text-lg font-bold text-[#336443]">{plan.price}</span>
-                            <span
-                              className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${
-                                isSelected
-                                  ? 'bg-[#336443] text-white'
-                                  : 'text-[#4b5b47] bg-gray-200/60'
-                              }`}
-                            >
-                              {isSelected ? '✓ Selected' : 'Select Plan'}
+                          <div className="text-left sm:text-right shrink-0">
+                            <span className="text-lg font-bold text-[#336443] block">{plan.price}</span>
+                            <span className={`text-[11px] font-medium ${isSelected ? 'text-[#336443]' : 'text-gray-400'}`}>
+                              {isSelected ? '✓ Selected Plan' : 'Click to Select'}
                             </span>
                           </div>
                         </div>
@@ -402,81 +393,96 @@ export default function SuiteGalleryPage() {
                 </motion.div>
               )}
 
+              {/* Tab 2: Overview */}
               {activeTab === 'overview' && (
                 <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
-                  <div>
-                    <h2 className="text-2xl font-normal text-[#1f2a1d] mb-3">Sanctuary Design & Atmosphere</h2>
-                    <p className="text-[#4b5b47] leading-relaxed text-base sm:text-lg font-light">
-                      {room.description}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-normal text-[#1f2a1d]">Architectural Overview</h3>
+                  <p className="text-sm text-[#4b5b47] leading-relaxed font-light">{room.description}</p>
 
-                  <div className="p-6 rounded-3xl bg-white border border-[#1f2a1d]/10 shadow-xs">
-                    <h3 className="font-semibold text-sm text-[#1f2a1d] mb-2">Climate & Light Dynamics</h3>
-                    <p className="text-xs text-[#4b5b47] leading-relaxed">
-                      Custom floor-to-ceiling double-glazed glass optimizes natural light during sunrise while keeping
-                      noise levels under 20dB for total peaceful sleep.
-                    </p>
+                  <div className="p-6 rounded-3xl bg-[#f4f7f4] border border-[#1f2a1d]/10">
+                    <h4 className="font-semibold text-sm text-[#1f2a1d] mb-3 flex items-center gap-2">
+                      <Layers className="w-4 h-4 text-[#336443]" /> Standard Room Amenities Included
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#4b5b47]">
+                      {room.amenities.map((item) => (
+                        <div key={item} className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#336443] shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               )}
 
+              {/* Tab 3: Room Highlights */}
               {activeTab === 'features' && (
                 <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-5"
+                  className="space-y-4"
                 >
-                  {room.features.map((feat) => (
-                    <div
-                      key={feat.title}
-                      className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] group-hover:bg-[#336443] transition-colors flex items-center justify-center mb-4">
-                        <feat.icon className="w-6 h-6 text-[#336443] group-hover:text-white transition-colors" />
-                      </div>
-                      <h4 className="font-semibold text-[#1f2a1d] text-sm mb-1.5">{feat.title}</h4>
-                      <p className="text-xs text-[#4b5b47] leading-relaxed">{feat.desc}</p>
-                    </div>
-                  ))}
+                  <h3 className="text-xl font-normal text-[#1f2a1d] mb-4">Suite Specific Highlights</h3>
+                  <div className="grid grid-cols-1 gap-4">
+                    {room.features.map((feat) => {
+                      const Icon = feat.icon;
+                      return (
+                        <div
+                          key={feat.title}
+                          className="p-5 rounded-3xl bg-white border border-[#1f2a1d]/10 shadow-xs flex items-start gap-4"
+                        >
+                          <div className="p-3 rounded-2xl bg-[#f4f7f4] text-[#336443] shrink-0">
+                            <Icon className="w-6 h-6" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-sm text-[#1f2a1d]">{feat.title}</h4>
+                            <p className="text-xs text-[#4b5b47] leading-relaxed mt-1 font-light">{feat.desc}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </motion.div>
               )}
 
+              {/* Tab 4: Privileges & Policies */}
               {activeTab === 'details' && (
                 <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
-                  <h3 className="text-xl font-normal text-[#1f2a1d]">Inclusive Privileges</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
-                    {room.amenities.map((amenity) => (
-                      <div
-                        key={amenity}
-                        className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-[#1f2a1d]/10 text-xs font-semibold text-[#1f2a1d] shadow-2xs hover:border-[#85AB8B] transition-colors"
-                      >
-                        <CheckCircle2 className="w-4.5 h-4.5 text-[#336443] shrink-0" />
-                        {amenity}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="p-5 rounded-2xl bg-[#f4f7f4] border border-[#1f2a1d]/10 text-xs text-[#4b5b47] flex items-center justify-between">
-                    <span>Check-in: {CHECK_IN_TIME} • Check-out: {CHECK_OUT_TIME}</span>
-                    <span className="font-bold text-[#336443]">Flexible Cancellation</span>
+                  <h3 className="text-xl font-normal text-[#1f2a1d]">Resort Privileges & Schedules</h3>
+                  <div className="space-y-3 text-xs text-[#4b5b47]">
+                    <div className="p-4 rounded-2xl bg-white border border-[#1f2a1d]/10 flex items-center gap-3">
+                      <Info className="w-4 h-4 text-[#336443]" />
+                      <span>Check-In Schedule: <strong>{CHECK_IN_TIME}</strong></span>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white border border-[#1f2a1d]/10 flex items-center gap-3">
+                      <Info className="w-4 h-4 text-[#336443]" />
+                      <span>Check-Out Schedule: <strong>{CHECK_OUT_TIME}</strong></span>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white border border-[#1f2a1d]/10 flex items-center gap-3">
+                      <Info className="w-4 h-4 text-[#336443]" />
+                      <span>24/7 Power Backup (Diesel Generator & In-Room Inverter)</span>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white border border-[#1f2a1d]/10 flex items-center gap-3">
+                      <Info className="w-4 h-4 text-[#336443]" />
+                      <span>Free Wi-Fi & Oriental Dining Facilities</span>
+                    </div>
                   </div>
                 </motion.div>
               )}
             </div>
 
-            {/* Reservation Card */}
+            {/* Reservation Card Form */}
             <div className="lg:col-span-5">
               <div
                 id="room-booking"
@@ -486,7 +492,7 @@ export default function SuiteGalleryPage() {
 
                 <div className="relative z-10">
                   <span className="text-[#85AB8B] font-semibold text-xs uppercase tracking-widest block mb-1">
-                    Direct Reservation
+                    Direct Reservation Inquiry
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-normal text-white mb-2">Reserve {room.name}</h3>
                   <div className="text-xs text-white/80 mb-6 pb-5 border-b border-white/10 flex items-center justify-between">
@@ -498,12 +504,12 @@ export default function SuiteGalleryPage() {
                     {/* MEAL PLAN SELECTOR IN RESERVATION FORM */}
                     <div>
                       <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5 flex items-center gap-1">
-                        <Utensils className="w-3 h-3 text-[#85AB8B]" /> Selected Plan / Occupancy
+                        <Utensils className="w-3 h-3 text-[#85AB8B]" /> Select Tariff Plan
                       </label>
                       <select
                         value={selectedPlanId}
                         onChange={(e) => setSelectedPlanId(e.target.value)}
-                        className="w-full bg-[#2a3827] border border-white/20 rounded-2xl px-3.5 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
+                        className="w-full bg-[#2d3a2a] border border-white/20 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
                       >
                         {roomPlans.map((plan) => (
                           <option key={plan.id} value={plan.id}>
@@ -541,6 +547,20 @@ export default function SuiteGalleryPage() {
                       />
                     </div>
 
+                    <div>
+                      <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
+                        Phone / WhatsApp
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="+91 98765 00000"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] transition-all"
+                      />
+                    </div>
+
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
@@ -549,8 +569,14 @@ export default function SuiteGalleryPage() {
                         <input
                           type="date"
                           required
+                          min={getTodayString()}
                           value={formData.checkIn}
-                          onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const nextDay = getNextDayString(val);
+                            const autoCheckOut = !formData.checkOut || formData.checkOut <= val ? nextDay : formData.checkOut;
+                            setFormData({ ...formData, checkIn: val, checkOut: autoCheckOut });
+                          }}
                           className="w-full bg-white/10 border border-white/20 rounded-2xl px-3 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
                         />
                       </div>
@@ -561,6 +587,7 @@ export default function SuiteGalleryPage() {
                         <input
                           type="date"
                           required
+                          min={formData.checkIn ? getNextDayString(formData.checkIn) : getTodayString()}
                           value={formData.checkOut}
                           onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
                           className="w-full bg-white/10 border border-white/20 rounded-2xl px-3 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
@@ -584,9 +611,18 @@ export default function SuiteGalleryPage() {
                     <Magnet padding={60} strength={2}>
                       <button
                         type="submit"
-                        className="w-full mt-4 bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-xs py-4 rounded-full transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-98 cursor-pointer"
+                        disabled={isSubmitting}
+                        className="w-full mt-4 bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-xs py-4 rounded-full transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-98 cursor-pointer disabled:opacity-50"
                       >
-                        <Send className="w-4 h-4" /> Submit Suite Reservation
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" /> Submitting...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-4 h-4" /> Submit Suite Reservation
+                          </>
+                        )}
                       </button>
                     </Magnet>
                   </form>
@@ -598,6 +634,13 @@ export default function SuiteGalleryPage() {
       </div>
 
       <SiteFooter variant="suite" />
+
+      {/* Thank You Confirmation Popup Modal */}
+      <ThankYouModal
+        isOpen={isThankYouOpen}
+        onClose={() => setIsThankYouOpen(false)}
+        enquiryData={submittedEnquiry}
+      />
     </motion.div>
   );
 }

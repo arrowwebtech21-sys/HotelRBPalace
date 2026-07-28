@@ -1,7 +1,8 @@
 import type { ChangeEvent, FormEvent } from 'react';
-import { Calendar, Send, Utensils } from 'lucide-react';
+import { Calendar, Loader2, Send, Utensils } from 'lucide-react';
 import Magnet from '../components/Magnet';
 import { ROOMS } from '../data/rooms';
+import { getTodayString, getNextDayString } from '../utils/booking';
 
 export type LandingBookingForm = {
   name: string;
@@ -20,9 +21,10 @@ type BookingFormSectionProps = {
   formData: LandingBookingForm;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
   onSubmit: (e: FormEvent) => void;
+  isSubmitting?: boolean;
 };
 
-export default function BookingFormSection({ formData, onChange, onSubmit }: BookingFormSectionProps) {
+export default function BookingFormSection({ formData, onChange, onSubmit, isSubmitting = false }: BookingFormSectionProps) {
   const selectedRoom = ROOMS.find((r) => r.id === formData.roomId) || ROOMS[0];
   const roomPlans = selectedRoom.plans || [];
 
@@ -89,6 +91,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
                 type="date"
                 name="checkIn"
                 required
+                min={getTodayString()}
                 value={formData.checkIn}
                 onChange={onChange}
                 className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#85AB8B]"
@@ -104,6 +107,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
                 type="date"
                 name="checkOut"
                 required
+                min={formData.checkIn ? getNextDayString(formData.checkIn) : getTodayString()}
                 value={formData.checkOut}
                 onChange={onChange}
                 className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#85AB8B]"
@@ -160,14 +164,23 @@ export default function BookingFormSection({ formData, onChange, onSubmit }: Boo
           </div>
 
           <div className="sm:col-span-2 md:col-span-3 mt-4 flex items-center justify-between">
-            <p className="text-xs text-white/60">⚡ Instant direct quote emailed to resort reservations.</p>
+            <p className="text-xs text-white/60">⚡ Direct background transmission to Hotel Management.</p>
 
             <Magnet padding={60} strength={2}>
               <button
                 type="submit"
-                className="bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-sm px-8 py-4 rounded-full flex items-center gap-2 shadow-xl cursor-pointer"
+                disabled={isSubmitting}
+                className="bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-sm px-8 py-4 rounded-full flex items-center gap-2 shadow-xl cursor-pointer disabled:opacity-50"
               >
-                <Send className="w-4 h-4" /> Submit Reservation
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" /> Submitting...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" /> Submit Reservation
+                  </>
+                )}
               </button>
             </Magnet>
           </div>
