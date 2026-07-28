@@ -23,7 +23,7 @@ export default function StackingSuiteCard({
   const targetScale = 1 - (totalCards - 1 - index) * 0.04;
   const cardProgress = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
 
-  // 3D Card Motion States
+  // Micro 3D Motion State (Capped at max 0.4 degrees so buttons remain completely easy to click)
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
@@ -33,8 +33,10 @@ export default function StackingSuiteCard({
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    setRotateX(-y / 35);
-    setRotateY(x / 35);
+    const tiltX = Math.max(-0.4, Math.min(0.4, -y / 350));
+    const tiltY = Math.max(-0.4, Math.min(0.4, x / 350));
+    setRotateX(tiltX);
+    setRotateY(tiltY);
   };
 
   const handleMouseLeave = () => {
@@ -52,7 +54,7 @@ export default function StackingSuiteCard({
       <motion.div
         style={{ scale: cardProgress }}
         animate={{ rotateX, rotateY }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 35 }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={`w-full max-w-[1360px] rounded-[36px] sm:rounded-[48px] p-6 sm:p-10 flex flex-col md:flex-row gap-8 h-full overflow-hidden preserve-3d group transition-all duration-500 relative ${
@@ -66,7 +68,6 @@ export default function StackingSuiteCard({
           <>
             <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#c4a668]/20 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#336443]/30 rounded-full blur-3xl pointer-events-none" />
-
           </>
         )}
 
@@ -134,7 +135,7 @@ export default function StackingSuiteCard({
                   : 'text-[#336443] bg-[#f4f7f4] border-[#1f2a1d]/5'
               }`}
             >
-              {isBanquet ? <Users className="w-3 h-3 text-[#c4a668]" /> : <Utensils className="w-3 h-3 text-[#85AB8B]" />} {planCount} Option Plan{planCount > 1 ? 's' : ''} (Rental & Catering)
+              {isBanquet ? <Users className="w-3 h-3 text-[#c4a668]" /> : <Utensils className="w-3 h-3 text-[#85AB8B]" />} {planCount} Option Plan{planCount > 1 ? 's' : ''} {isBanquet ? '(Rental & Catering)' : '(EP, CP, MAP)'}
             </div>
 
             <p
@@ -197,7 +198,7 @@ export default function StackingSuiteCard({
                     : 'bg-[#3d5638] hover:bg-[#2d4228] text-white'
                 }`}
               >
-                Inquire Banquet
+                {isBanquet ? 'Inquire Banquet' : 'Reserve'}
               </a>
             </div>
           </div>

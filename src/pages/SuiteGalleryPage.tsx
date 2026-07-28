@@ -12,7 +12,11 @@ import {
   Sparkles,
   Users,
   Utensils,
-  Tag
+  Tag,
+  User,
+  Mail,
+  Calendar,
+  MessageSquare
 } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
@@ -463,46 +467,62 @@ export default function SuiteGalleryPage() {
               )}
             </div>
 
-            {/* Reservation Card */}
+            {/* Redesigned Glassmorphic Reservation Card */}
             <div className="lg:col-span-5">
               <div
                 id="room-booking"
-                className="bg-[#1f2a1d] text-white p-8 sm:p-10 rounded-[40px] shadow-2xl h-fit sticky top-28 border border-white/10 relative overflow-hidden"
+                className="bg-[#172215] text-white p-7 sm:p-9 rounded-[36px] shadow-3xl h-fit sticky top-28 border border-[#85AB8B]/30 relative overflow-hidden"
               >
-                <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#85AB8B]/15 rounded-full blur-3xl pointer-events-none" />
+                {/* Decorative Corner Filigree Accents */}
+                <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-[#85AB8B]/40 rounded-tl-xl pointer-events-none" />
+                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#85AB8B]/40 rounded-tr-xl pointer-events-none" />
+
+                {/* Ambient Glow Orbs */}
+                <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#85AB8B]/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#336443]/30 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="relative z-10">
-                  <span className="text-[#85AB8B] font-semibold text-xs uppercase tracking-widest block mb-1">
-                    Direct Reservation
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-normal text-white mb-2">Reserve {room.name}</h3>
-                  <div className="text-xs text-white/80 mb-6 pb-5 border-b border-white/10 flex items-center justify-between">
-                    <span className="font-semibold text-sm text-[#85AB8B]">{selectedPlan?.price || room.price}</span>
-                    <span className="text-[11px] text-white/60 uppercase">{selectedPlan?.code || 'EP'} PLAN</span>
+                  {/* Top Header Badge with Live Suite Image Thumbnail */}
+                  <div className="flex items-center justify-between gap-4 mb-6 pb-5 border-b border-white/12">
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 text-[#85AB8B] font-semibold text-[11px] uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15 mb-2 shadow-xs">
+                        <Sparkles className="w-3 h-3 text-[#85AB8B]" /> Direct Suite Reservation
+                      </span>
+                      <h3 className="text-2xl font-normal text-white mt-0.5">Reserve {room.name}</h3>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl p-2.5 pr-4 rounded-2xl border border-white/20 shrink-0 shadow-xl">
+                      <img src={room.image} alt={room.name} className="w-12 h-12 rounded-xl object-cover border border-white/20 shrink-0" />
+                      <div>
+                        <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold block">Active Rate</span>
+                        <p className="text-xs font-bold text-white">{selectedPlan?.price || room.price}</p>
+                      </div>
+                    </div>
                   </div>
 
                   <form onSubmit={handleBookingSubmit} className="space-y-4">
-                    {/* MEAL PLAN SELECTOR IN RESERVATION FORM */}
-                    <div>
-                      <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5 flex items-center gap-1">
-                        <Utensils className="w-3 h-3 text-[#85AB8B]" /> Selected Plan / Occupancy
+                    {/* MEAL PLAN SELECTOR */}
+                    <div className="space-y-1.5">
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                        <Utensils className="w-3.5 h-3.5 text-[#85AB8B]" /> Selected Tariff & Meal Plan
                       </label>
                       <select
                         value={selectedPlanId}
                         onChange={(e) => setSelectedPlanId(e.target.value)}
-                        className="w-full bg-[#2a3827] border border-white/20 rounded-2xl px-3.5 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
+                        className="w-full bg-[#233120] border border-white/15 rounded-2xl px-3.5 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all cursor-pointer"
                       >
                         {roomPlans.map((plan) => (
-                          <option key={plan.id} value={plan.id}>
+                          <option key={plan.id} value={plan.id} className="bg-[#1c281a] text-white py-1.5">
                             [{plan.code}] {plan.title} — {plan.price}
                           </option>
                         ))}
                       </select>
                     </div>
 
-                    <div>
-                      <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
-                        Full Name
+                    {/* Full Name */}
+                    <div className="space-y-1.5">
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                        <User className="w-3.5 h-3.5 text-[#85AB8B]" /> Full Name
                       </label>
                       <input
                         type="text"
@@ -510,13 +530,14 @@ export default function SuiteGalleryPage() {
                         placeholder="Jane Doe"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] transition-all"
+                        className="w-full bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] focus:bg-white/10 transition-all"
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
-                        Email Address
+                    {/* Email Address */}
+                    <div className="space-y-1.5">
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                        <Mail className="w-3.5 h-3.5 text-[#85AB8B]" /> Email Address
                       </label>
                       <input
                         type="email"
@@ -524,58 +545,66 @@ export default function SuiteGalleryPage() {
                         placeholder="jane@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] transition-all"
+                        className="w-full bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] focus:bg-white/10 transition-all"
                       />
                     </div>
 
+                    {/* Dates */}
                     <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
-                          Check-In
+                      <div className="space-y-1.5">
+                        <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-[#85AB8B]" /> Check-In
                         </label>
                         <input
                           type="date"
                           required
                           value={formData.checkIn}
                           onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                          className="w-full bg-white/10 border border-white/20 rounded-2xl px-3 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
+                          className="w-full bg-white/5 border border-white/15 rounded-2xl px-3 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] focus:bg-white/10 transition-all [color-scheme:dark]"
                         />
                       </div>
-                      <div>
-                        <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
-                          Check-Out
+                      <div className="space-y-1.5">
+                        <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-[#85AB8B]" /> Check-Out
                         </label>
                         <input
                           type="date"
                           required
                           value={formData.checkOut}
                           onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                          className="w-full bg-white/10 border border-white/20 rounded-2xl px-3 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] transition-all"
+                          className="w-full bg-white/5 border border-white/15 rounded-2xl px-3 py-3 text-xs text-white focus:outline-none focus:border-[#85AB8B] focus:bg-white/10 transition-all [color-scheme:dark]"
                         />
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-[11px] font-medium uppercase tracking-wider text-white/70 mb-1.5">
-                        Special Requests
+                    {/* Special Requests */}
+                    <div className="space-y-1.5">
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
+                        <MessageSquare className="w-3.5 h-3.5 text-[#85AB8B]" /> Special Requests
                       </label>
                       <textarea
                         rows={3}
                         placeholder="Airport shuttle required, dietary preferences..."
                         value={formData.specialRequests}
                         onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                        className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] transition-all"
+                        className="w-full bg-white/5 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#85AB8B] focus:bg-white/10 transition-all resize-none"
                       />
                     </div>
 
-                    <Magnet padding={60} strength={2}>
-                      <button
-                        type="submit"
-                        className="w-full mt-4 bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-xs py-4 rounded-full transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-98 cursor-pointer"
-                      >
-                        <Send className="w-4 h-4" /> Submit Suite Reservation
-                      </button>
-                    </Magnet>
+                    <div className="pt-3">
+                      <Magnet padding={60} strength={2}>
+                        <button
+                          type="submit"
+                          className="w-full bg-[#85AB8B] hover:bg-[#6e9674] text-[#172215] font-bold text-xs py-4 rounded-full transition-all flex items-center justify-center gap-2 shadow-2xl hover:shadow-3xl hover:scale-105 active:scale-95 cursor-pointer"
+                        >
+                          <Send className="w-4 h-4" /> Submit Suite Reservation Quote
+                        </button>
+                      </Magnet>
+                    </div>
+
+                    <p className="text-[11px] text-white/60 text-center pt-1 font-light">
+                      ⚡ Instant Direct Quote emailed to Hotel RB Palace reservations desk.
+                    </p>
                   </form>
                 </div>
               </div>
