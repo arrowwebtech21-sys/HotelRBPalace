@@ -73,7 +73,13 @@ export default function LandingPage() {
         }}
       />
       <BookingPartnersSection />
-      <AmenitiesSection />
+      <AmenitiesSection
+        onBook={(id) => {
+          const matchedRoom = ROOMS.find((r) => r.id === id);
+          const defaultPlanId = matchedRoom?.plans[0]?.id || '';
+          setFormData((prev) => ({ ...prev, roomId: id, planId: defaultPlanId }));
+        }}
+      />
       <BookingFormSection formData={formData} onChange={handleInputChange} onSubmit={handleBookingSubmit} />
       <LocationSection />
       <SiteFooter variant="landing" />

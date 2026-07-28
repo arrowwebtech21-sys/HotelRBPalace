@@ -15,7 +15,7 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
         variant === 'suite' ? 'py-10 mt-auto w-full' : 'py-14'
       }`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/10">
           {/* Brand & Tagline */}
           <div className="md:col-span-5">
@@ -63,7 +63,7 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
           <div className="md:col-span-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-3">Quick Navigation</h4>
             <ul className="space-y-2 text-xs text-white/60">
-              <li><a href="#experience" className="hover:text-white transition-colors">Royal Experience</a></li>
+              <li><a href="#experience" className="hover:text-white transition-colors">Resort Experience</a></li>
               <li><a href="#corporate-clients" className="hover:text-white transition-colors">Corporate Partners</a></li>
               <li><a href="#suites" className="hover:text-white transition-colors">5 Room Tiers & Meal Plans</a></li>
               <li><a href="#booking-partners" className="hover:text-white transition-colors">OTA Booking Channels</a></li>

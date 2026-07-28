@@ -20,14 +20,14 @@ export default function CorporateClientsSection() {
   return (
     <section id="corporate-clients" className="py-20 bg-[#fcfdfc] border-t border-b border-[#1f2a1d]/10 relative overflow-hidden">
       {/* Section Header */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 text-center mb-12">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 text-center mb-12">
         <span className="inline-flex items-center gap-1.5 text-[#336443] font-semibold text-xs uppercase tracking-widest bg-[#f4f7f4] px-4 py-1.5 rounded-full border border-[#1f2a1d]/10 mb-3 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Corporate Excellence
         </span>
-        <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] tracking-tight leading-tight mt-1">
+        <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] tracking-tight leading-tight mt-1">
           Trusted by Industry Leaders
         </h2>
-        <p className="text-[#4b5b47] text-sm sm:text-base max-w-2xl mx-auto mt-3 font-light">
+        <p className="text-[#4b5b47] text-xs sm:text-sm max-w-2xl mx-auto mt-3 font-light">
           Over 68+ premier multinational corporations, banking leaders, automotive manufacturers, and industrial giants host their official conferences, executive retreats, and banquets at Hotel RB Palace.
         </p>
       </div>

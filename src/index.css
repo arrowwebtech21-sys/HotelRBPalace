@@ -4,16 +4,33 @@
   html {
     scroll-behavior: smooth;
   }
-  
-  html, body, #root {
+
+  html,
+  body,
+  #root {
     min-height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Neue Haas Grotesk Display Pro 55 Roman', 'Neue Haas Grotesk Text Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     background-color: #fcfdfc;
     color: #1f2a1d;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  button, input, select, textarea {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+.font-sora {
+  font-family: 'Sora', sans-serif;
 }
 
 /* Perspective & 3D Utilities */
@@ -34,6 +51,7 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -43,6 +61,7 @@
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0%);
   }
@@ -78,6 +97,10 @@
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: #85AB8B;
   border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #336443;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {

@@ -1,8 +1,35 @@
-import { Compass, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Navigation,
+  Car,
+  Train,
+  Bus,
+  Plane,
+  Copy,
+  Check,
+  Sparkles,
+  ExternalLink,
+  ShieldCheck,
+  Compass,
+  Clock
+} from 'lucide-react';
 import Magnet from '../components/Magnet';
 import { HOTEL_ADDRESS, HOTEL_PHONE, MANAGER_EMAIL } from '../data/constants';
 
+const cityRoutes = [
+  { city: 'Agra', distance: '55 km', time: '50 Mins', via: 'NH-3 Highway Corridor', icon: Car },
+  { city: 'Gwalior', distance: '60 km', time: '55 Mins', via: 'NH-3 Direct Highway', icon: Plane },
+  { city: 'Delhi / NCR', distance: '240 km', time: '3.5 Hours', via: 'Yamuna Expressway / NH-3', icon: Car },
+  { city: 'Jaipur', distance: '270 km', time: '4 Hours', via: 'NH-21 & Dholpur Bypass', icon: Car }
+];
+
 export default function LocationSection() {
+  const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState<'address' | 'connectivity' | 'routes'>('address');
+
   const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     'Hotel RB Palace Near chopra mode Bus stand NH-3 Highway Dholpur Rajasthan 328001'
   )}`;
@@ -11,129 +38,241 @@ export default function LocationSection() {
     'Hotel RB Palace Near chopra mode Bus stand NH-3 Highway Dholpur Rajasthan 328001'
   )}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
+  const handleCopyAddress = () => {
+    navigator.clipboard.writeText(HOTEL_ADDRESS);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
   return (
-    <section id="location" className="py-28 px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden">
-      <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div>
-          <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-1.5 bg-[#f4f7f4] px-3.5 py-1 rounded-full border border-[#1f2a1d]/5 mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Prime Coordinates
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d]">Location & Access</h2>
-        </div>
-        <div className="flex items-center justify-center md:justify-end gap-3">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1f2a1d]/5 border border-[#1f2a1d]/10 text-xs font-mono text-[#336443]">
-            <span className="w-2 h-2 rounded-full bg-[#85AB8B] animate-ping" />
-            Dholpur, Rajasthan (Pin: 328001)
-          </span>
-        </div>
-      </div>
+    <section id="location" className="py-24 bg-[#f4f7f4] border-t border-[#1f2a1d]/10 relative overflow-hidden">
+      {/* Background Subtle Gradient Blobs */}
+      <div className="absolute top-10 right-10 w-96 h-96 bg-[#85AB8B]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#336443]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-        <div className="lg:col-span-5 bg-[#1f2a1d] text-white p-8 sm:p-10 rounded-[36px] sm:rounded-[48px] flex flex-col justify-between shadow-2xl relative overflow-hidden border border-white/10 group">
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#85AB8B]/20 rounded-full blur-3xl pointer-events-none group-hover:bg-[#85AB8B]/30 transition-all duration-700" />
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#336443]/30 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10">
-            <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
-              <div>
-                <p className="text-xs text-[#85AB8B] font-semibold uppercase tracking-widest">Resort Sanctuary</p>
-                <h3 className="text-2xl font-normal text-white mt-1">Hotel RB Palace</h3>
-              </div>
-              <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-[#85AB8B]">
-                <Compass className="w-6 h-6" />
-              </div>
-            </div>
-
-            <div className="space-y-4 mb-8">
-              <a
-                href={mapsSearchUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group/item"
-              >
-                <div className="p-2.5 rounded-xl bg-[#85AB8B]/20 text-[#85AB8B] shrink-0 group-hover/item:bg-[#85AB8B] group-hover/item:text-[#1f2a1d] transition-colors">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Exact Location Address</p>
-                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5 leading-snug">
-                    {HOTEL_ADDRESS}
-                  </p>
-                </div>
-              </a>
-
-              <a
-                href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group/item"
-              >
-                <div className="p-2.5 rounded-xl bg-[#85AB8B]/20 text-[#85AB8B] shrink-0 group-hover/item:bg-[#85AB8B] group-hover/item:text-[#1f2a1d] transition-colors">
-                  <Phone className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Front Desk & Enquiries</p>
-                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5">{HOTEL_PHONE}</p>
-                </div>
-              </a>
-
-              <a
-                href={`mailto:${MANAGER_EMAIL}`}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group/item"
-              >
-                <div className="p-2.5 rounded-xl bg-[#85AB8B]/20 text-[#85AB8B] shrink-0 group-hover/item:bg-[#85AB8B] group-hover/item:text-[#1f2a1d] transition-colors">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider font-medium">Inquiries</p>
-                  <p className="text-xs sm:text-sm text-white/90 font-light mt-0.5">{MANAGER_EMAIL}</p>
-                </div>
-              </a>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
-                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Dholpur Junction</p>
-                <p className="text-base font-semibold text-white mt-1">10 Mins</p>
-                <p className="text-[10px] text-white/50">Near Bus Stand / NH-3</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
-                <p className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-semibold">Gwalior Airport</p>
-                <p className="text-base font-semibold text-white mt-1">55 Mins</p>
-                <p className="text-[10px] text-white/50">Via NH-3 Highway</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative z-10 pt-8 mt-8 border-t border-white/10">
-            <Magnet padding={60} strength={2}>
-              <a
-                href={mapsSearchUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-xs py-4 px-6 rounded-full flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-2xl cursor-pointer"
-              >
-                <MapPin className="w-4 h-4" /> Open Dholpur NH-3 in Google Maps
-              </a>
-            </Magnet>
-          </div>
-        </div>
-
-        <div className="lg:col-span-7 rounded-[36px] sm:rounded-[48px] overflow-hidden shadow-2xl border border-[#1f2a1d]/10 min-h-[450px] relative group bg-[#2d3a2a]">
-          <div className="absolute top-6 left-6 z-20 bg-white/85 backdrop-blur-xl border border-white/60 p-4 sm:p-5 rounded-3xl shadow-xl max-w-xs hidden sm:block">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-[#336443] animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1f2a1d]">
-                Hotel RB Palace Entrance
-              </span>
-            </div>
-            <p className="text-xs text-[#4b5b47] mt-2 leading-relaxed">
-              Near chopra mode, Bus stand, On NH-3 Highway, Dholpur, Rajasthan 328001.
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
+        {/* Header Title Bar */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#1f2a1d]/10">
+          <div>
+            <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-full border border-[#1f2a1d]/10 mb-2 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Strategic Location
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] mt-1">Location & Route Guide</h2>
+            <p className="text-[#4b5b47] text-xs sm:text-sm mt-1 max-w-xl font-light">
+              Situated directly on the main NH-3 Highway near Chopra Mode in Dholpur, Rajasthan.
             </p>
           </div>
 
+          {/* Quick Nav Badges */}
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#1f2a1d]/10 text-xs font-semibold text-[#1f2a1d] shadow-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#85AB8B] animate-pulse" />
+              Main NH-3 Highway Hub
+            </span>
+            <a
+              href={mapsSearchUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#1f2a1d] hover:bg-[#2e3e2b] text-white text-xs font-semibold px-5 py-2 rounded-full transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
+            >
+              <Navigation className="w-3.5 h-3.5 text-[#85AB8B]" /> Live Directions <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
+        </div>
+
+        {/* 4 Regional Highway Connection Cards Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          {cityRoutes.map((route) => (
+            <div
+              key={route.city}
+              className="bg-white p-5 rounded-3xl border border-[#1f2a1d]/10 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-bold text-[#85AB8B] uppercase tracking-wider bg-[#f4f7f4] px-2.5 py-1 rounded-full border border-[#1f2a1d]/5">
+                  {route.distance}
+                </span>
+                <route.icon className="w-4 h-4 text-[#336443] group-hover:scale-110 transition-transform" />
+              </div>
+              <h4 className="text-sm font-bold text-[#1f2a1d] mb-0.5">{route.city}</h4>
+              <p className="text-base font-extrabold text-[#336443] mb-1">{route.time}</p>
+              <p className="text-[10px] text-[#4b5b47] line-clamp-1">{route.via}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Tab Navigation Filter Strip */}
+        <div className="flex items-center justify-between bg-white p-2 rounded-3xl border border-[#1f2a1d]/10 shadow-xs mb-8 flex-wrap gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTab('address')}
+              className={`py-2.5 px-5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === 'address'
+                  ? 'bg-[#1f2a1d] text-white shadow-md'
+                  : 'text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4]'
+              }`}
+            >
+              <MapPin className="w-4 h-4 text-[#85AB8B]" /> Address & Desk Contacts
+            </button>
+
+            <button
+              onClick={() => setActiveTab('connectivity')}
+              className={`py-2.5 px-5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === 'connectivity'
+                  ? 'bg-[#1f2a1d] text-white shadow-md'
+                  : 'text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4]'
+              }`}
+            >
+              <Compass className="w-4 h-4 text-[#85AB8B]" /> Local Transport (3 Hubs)
+            </button>
+          </div>
+
+          {/* Copy Address Quick Trigger */}
+          <button
+            onClick={handleCopyAddress}
+            className="py-2.5 px-4 rounded-2xl bg-[#f4f7f4] hover:bg-[#e4eae4] text-[#1f2a1d] text-xs font-semibold border border-[#1f2a1d]/10 flex items-center gap-2 transition-all cursor-pointer"
+          >
+            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-[#336443]" />}
+            {copied ? 'Address Copied!' : 'Copy Full Address'}
+          </button>
+        </div>
+
+        {/* Interactive Tab Cards */}
+        {activeTab === 'connectivity' && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {/* Bus Stand */}
+            <div className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-sm hover:border-[#85AB8B] transition-all flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] text-[#336443] flex items-center justify-center shrink-0">
+                <Bus className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-bold">200 meters away</span>
+                <h4 className="text-base font-bold text-[#1f2a1d] mt-0.5">Chopra Mode Bus Stand</h4>
+                <p className="text-xs text-[#4b5b47] mt-1 leading-relaxed">
+                  1-minute walk from hotel entrance. Direct state bus connectivity for Agra, Gwalior & Jaipur.
+                </p>
+              </div>
+            </div>
+
+            {/* Railway Station */}
+            <div className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-sm hover:border-[#85AB8B] transition-all flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] text-[#336443] flex items-center justify-center shrink-0">
+                <Train className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-bold">3.2 km away</span>
+                <h4 className="text-base font-bold text-[#1f2a1d] mt-0.5">Dholpur Railway Junction</h4>
+                <p className="text-xs text-[#4b5b47] mt-1 leading-relaxed">
+                  10-minute auto/cab drive. Major express trains connected to Delhi, Agra, Gwalior & Bhopal.
+                </p>
+              </div>
+            </div>
+
+            {/* Airport */}
+            <div className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-sm hover:border-[#85AB8B] transition-all flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] text-[#336443] flex items-center justify-center shrink-0">
+                <Plane className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-bold">60 km away</span>
+                <h4 className="text-base font-bold text-[#1f2a1d] mt-0.5">Gwalior Rajmata Airport</h4>
+                <p className="text-xs text-[#4b5b47] mt-1 leading-relaxed">
+                  55-minute direct drive via NH-3 Highway. Hotel taxi pickup and drop available on request.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'address' && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {/* Address Card */}
+            <div className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-sm flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] text-[#336443] flex items-center justify-center shrink-0">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-bold">Official Property Address</span>
+                <h4 className="text-sm font-bold text-[#1f2a1d] mt-0.5">Hotel RB Palace Dholpur</h4>
+                <p className="text-xs text-[#4b5b47] mt-1 leading-relaxed">{HOTEL_ADDRESS}</p>
+              </div>
+            </div>
+
+            {/* Desk Phone */}
+            <a
+              href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
+              className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-sm hover:border-[#85AB8B] transition-all flex items-start gap-4 group"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] text-[#336443] group-hover:bg-[#336443] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
+                <Phone className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-bold">24/7 Reception Desk</span>
+                <h4 className="text-base font-bold text-[#1f2a1d] mt-0.5">{HOTEL_PHONE}</h4>
+                <p className="text-xs text-[#4b5b47] mt-1">Tap to call desk for instant assistance</p>
+              </div>
+            </a>
+
+            {/* Email Contact */}
+            <a
+              href={`mailto:${MANAGER_EMAIL}`}
+              className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-sm hover:border-[#85AB8B] transition-all flex items-start gap-4 group"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] text-[#336443] group-hover:bg-[#336443] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[10px] text-[#85AB8B] uppercase tracking-wider font-bold">Reservations & Banquets</span>
+                <h4 className="text-sm font-bold text-[#1f2a1d] mt-0.5 line-clamp-1">{MANAGER_EMAIL}</h4>
+                <p className="text-xs text-[#4b5b47] mt-1">Direct corporate & banquet inquiries</p>
+              </div>
+            </a>
+          </div>
+        )}
+
+        {/* Full-Width Panoramic Map Display Container with Floating HUD Overlay */}
+        <div className="rounded-[36px] sm:rounded-[48px] overflow-hidden shadow-2xl border border-[#1f2a1d]/10 min-h-[500px] relative group bg-white">
+          {/* Top Floating Landmark Overlay Card */}
+          <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-xl border border-[#1f2a1d]/10 p-5 rounded-3xl shadow-xl max-w-sm hidden sm:block">
+            <div className="flex items-center justify-between gap-3 mb-2">
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#336443] uppercase tracking-wider bg-[#f4f7f4] px-3 py-1 rounded-full border border-[#1f2a1d]/5">
+                <span className="w-2 h-2 rounded-full bg-[#85AB8B] animate-pulse" /> Hotel RB Palace Landmark
+              </span>
+              <span className="text-[11px] font-extrabold text-[#336443]">NH-3 Highway</span>
+            </div>
+            <h4 className="text-sm font-bold text-[#1f2a1d]">Near Chopra Mode Bus Stand</h4>
+            <p className="text-xs text-[#4b5b47] mt-1 leading-relaxed font-light">
+              Dholpur, Rajasthan 328001. Convenient 24/7 gate entry with free on-site valet parking.
+            </p>
+          </div>
+
+          {/* Bottom Floating Navigation Bar */}
+          <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/90 backdrop-blur-xl p-4 sm:px-6 rounded-3xl border border-[#1f2a1d]/10 shadow-2xl">
+            <div className="flex items-center gap-4 text-xs font-semibold text-[#1f2a1d]">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-[#336443]" /> On-Site Free Guest Parking
+              </span>
+              <span className="hidden md:flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-[#336443]" /> 24/7 Front Gate Access
+              </span>
+            </div>
+
+            <Magnet padding={50} strength={2}>
+              <a
+                href={mapsSearchUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-[#1f2a1d] hover:bg-[#2e3e2b] text-white text-xs font-bold px-6 py-3 rounded-full transition-all shadow-md flex items-center gap-2 cursor-pointer whitespace-nowrap"
+              >
+                <Navigation className="w-3.5 h-3.5 text-[#85AB8B]" /> Open Interactive Google Maps
+              </a>
+            </Magnet>
+          </div>
+
+          {/* Interactive Google Map iFrame */}
           <iframe
             title="Hotel RB Palace Dholpur Location Map"
             src={mapsEmbedUrl}
-            className="w-full h-full border-0 min-h-[450px] filter grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0"
+            className="w-full h-full border-0 min-h-[500px] transition-all duration-700"
             loading="lazy"
           />
         </div>

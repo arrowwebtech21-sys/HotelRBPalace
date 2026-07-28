@@ -16,7 +16,7 @@ export default function ExperienceSection() {
   const [sectionRef, isVisible] = useOnScreen({ threshold: 0.15 });
 
   return (
-    <section id="experience" ref={sectionRef} className="py-28 px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden">
+    <section id="experience" ref={sectionRef} className="py-28 px-6 sm:px-12 max-w-[1400px] mx-auto overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div
           className={`transition-all duration-1000 ease-out transform ${
@@ -27,14 +27,14 @@ export default function ExperienceSection() {
             <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Unmatched Hospitality
           </span>
 
-          <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] leading-tight mt-2">
+          <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] leading-tight mt-2">
             Crafted for moments that{' '}
             <span className="text-[#336443] font-medium underline decoration-[#85AB8B]/40 underline-offset-8">
               linger forever
             </span>
           </h2>
 
-          <p className="text-[#4b5b47] leading-relaxed my-6 text-base font-light">
+          <p className="text-[#4b5b47] leading-relaxed my-5 text-sm sm:text-base font-light">
             Situated on NH-3 Highway near Chopra Mode in Dholpur, Hotel RB Palace blends authentic Rajasthani warmth with modern luxury. Every room is equipped with air conditioning, satellite LED TVs, 24hr hot & cold water, in-room refrigerators, electric kettles, and dual inverter & generator power backup.
           </p>
 

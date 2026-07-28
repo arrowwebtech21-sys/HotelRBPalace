@@ -16,11 +16,11 @@ export default function SuitesSection({ onBook }: SuitesSectionProps) {
 
   return (
     <section id="suites" ref={suitesContainerRef} className="py-24 bg-[#f4f7f4] px-6 sm:px-12 relative">
-      <div className="max-w-7xl mx-auto mb-12">
+      <div className="max-w-[1400px] mx-auto mb-12">
         <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest bg-white/80 px-3.5 py-1 rounded-full border border-[#1f2a1d]/5">
           Accommodations
         </span>
-        <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] mt-2">Suites & Private Villas</h2>
+        <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] mt-2">Suites & Private Villas</h2>
       </div>
 
       <div className="relative">

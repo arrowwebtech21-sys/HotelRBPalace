@@ -108,20 +108,20 @@ export default function HeroSection() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 pt-10 sm:pt-0">
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/30 text-white text-xs tracking-widest uppercase font-medium mb-6 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Royal Heritage Experience
+          <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Premier Hospitality Landmark • Dholpur, Rajasthan
         </span>
-        <h1 className="font-normal leading-[1.02] text-white text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] max-w-5xl tracking-tight drop-shadow-lg">
-          Sanctuary of <span className="text-[#85AB8B]">tranquility & royal</span> elegance
+        <h1 className="font-normal leading-[1.08] text-white text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] max-w-6xl tracking-tight drop-shadow-lg">
+          Dholpur's Premier Address for <span className="text-[#85AB8B]">Luxury Suites</span> & Grand Events
         </h1>
-        <p className="mt-6 text-white/90 text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-xl">
-          Experience timeless Rajasthani hospitality at Hotel RB Palace, Dholpur, Rajasthan.
+        <p className="mt-5 text-white/90 text-xs sm:text-base md:text-lg font-light leading-relaxed max-w-3xl">
+          Conveniently located on the NH-3 Highway near Chopra Mode, Hotel RB Palace provides premium air-conditioned accommodations, executive banquet venues, and fine dining.
         </p>
       </div>
 
       <div className="relative z-10 px-6 sm:px-10 md:px-14 pb-8 flex items-center justify-between">
         <div className="flex items-center gap-3 text-white/90">
           <Sparkles className="w-4 h-4 text-[#85AB8B]" />
-          <p className="text-xs text-white/80 font-light">Banquet halls (100–150 Pax), Oriental dining & 24/7 power in Dholpur, Rajasthan</p>
+          <p className="text-xs text-white/90 font-medium">NH-3 Highway, Dholpur • Air-Conditioned Banquets (100–150 Pax) • Oriental Dining & 24/7 Power Backup</p>
         </div>
         <a
           href="#suites"

@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   Eye,
   Info,
-  Layers,
   Maximize,
   Send,
   Sparkle,
@@ -26,7 +25,7 @@ export default function SuiteGalleryPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
-  const [activeTab, setActiveTab] = useState<'overview' | 'plans' | 'features' | 'details'>('plans');
+  const [activeTab, setActiveTab] = useState<'overview' | 'plans' | 'features'>('plans');
 
   // Zoom State
   const [isHovered, setIsHovered] = useState(false);
@@ -287,7 +286,7 @@ export default function SuiteGalleryPage() {
         </motion.section>
 
         {/* Information & Tariff Plans Grid */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-12 py-12 border-t border-[#1f2a1d]/10">
+        <section className="max-w-[1400px] mx-auto px-6 sm:px-12 py-12 border-t border-[#1f2a1d]/10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-7 space-y-8">
               <div className="flex items-center gap-2 bg-[#f4f7f4] p-1.5 rounded-2xl border border-[#1f2a1d]/10 overflow-x-auto scrollbar-none">
@@ -320,16 +319,6 @@ export default function SuiteGalleryPage() {
                   }`}
                 >
                   <Sparkle className="w-3.5 h-3.5 text-[#336443]" /> Highlights
-                </button>
-                <button
-                  onClick={() => setActiveTab('details')}
-                  className={`flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                    activeTab === 'details'
-                      ? 'bg-white text-[#1f2a1d] shadow-sm'
-                      : 'text-[#4b5b47] hover:text-[#1f2a1d]'
-                  }`}
-                >
-                  <Layers className="w-3.5 h-3.5 text-[#336443]" /> Privileges
                 </button>
               </div>
 
@@ -431,46 +420,44 @@ export default function SuiteGalleryPage() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-5"
+                  className="space-y-8"
                 >
-                  {room.features.map((feat) => (
-                    <div
-                      key={feat.title}
-                      className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] group-hover:bg-[#336443] transition-colors flex items-center justify-center mb-4">
-                        <feat.icon className="w-6 h-6 text-[#336443] group-hover:text-white transition-colors" />
-                      </div>
-                      <h4 className="font-semibold text-[#1f2a1d] text-sm mb-1.5">{feat.title}</h4>
-                      <p className="text-xs text-[#4b5b47] leading-relaxed">{feat.desc}</p>
+                  <div>
+                    <h3 className="text-xl font-normal text-[#1f2a1d] mb-4">Key Features & Experience</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                      {room.features.map((feat) => (
+                        <div
+                          key={feat.title}
+                          className="bg-white p-6 rounded-3xl border border-[#1f2a1d]/10 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                        >
+                          <div className="w-12 h-12 rounded-2xl bg-[#f4f7f4] group-hover:bg-[#336443] transition-colors flex items-center justify-center mb-4">
+                            <feat.icon className="w-6 h-6 text-[#336443] group-hover:text-white transition-colors" />
+                          </div>
+                          <h4 className="font-semibold text-[#1f2a1d] text-sm mb-1.5">{feat.title}</h4>
+                          <p className="text-xs text-[#4b5b47] leading-relaxed">{feat.desc}</p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </motion.div>
-              )}
-
-              {activeTab === 'details' && (
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-6"
-                >
-                  <h3 className="text-xl font-normal text-[#1f2a1d]">Inclusive Privileges</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
-                    {room.amenities.map((amenity) => (
-                      <div
-                        key={amenity}
-                        className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-[#1f2a1d]/10 text-xs font-semibold text-[#1f2a1d] shadow-2xs hover:border-[#85AB8B] transition-colors"
-                      >
-                        <CheckCircle2 className="w-4.5 h-4.5 text-[#336443] shrink-0" />
-                        {amenity}
-                      </div>
-                    ))}
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-[#f4f7f4] border border-[#1f2a1d]/10 text-xs text-[#4b5b47] flex items-center justify-between">
-                    <span>Check-in: {CHECK_IN_TIME} • Check-out: {CHECK_OUT_TIME}</span>
-                    <span className="font-bold text-[#336443]">Flexible Cancellation</span>
+                  <div className="space-y-4 pt-6 border-t border-[#1f2a1d]/10">
+                    <h3 className="text-xl font-normal text-[#1f2a1d]">Inclusive Privileges & Amenities</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+                      {room.amenities.map((amenity) => (
+                        <div
+                          key={amenity}
+                          className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-[#1f2a1d]/10 text-xs font-semibold text-[#1f2a1d] shadow-2xs hover:border-[#85AB8B] transition-colors"
+                        >
+                          <CheckCircle2 className="w-4.5 h-4.5 text-[#336443] shrink-0" />
+                          {amenity}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="p-5 rounded-2xl bg-[#f4f7f4] border border-[#1f2a1d]/10 text-xs text-[#4b5b47] flex items-center justify-between">
+                      <span>Check-in: {CHECK_IN_TIME} • Check-out: {CHECK_OUT_TIME}</span>
+                      <span className="font-bold text-[#336443]">Flexible Cancellation</span>
+                    </div>
                   </div>
                 </motion.div>
               )}

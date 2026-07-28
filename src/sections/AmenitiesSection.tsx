@@ -5,7 +5,11 @@ import { OFFICIAL_FACILITIES, type Facility } from '../data/facilities';
 
 type CategoryFilter = 'All' | 'Room Comforts' | 'Power & Service' | 'Dining & Events';
 
-export default function AmenitiesSection() {
+type AmenitiesSectionProps = {
+  onBook?: (roomId: string) => void;
+};
+
+export default function AmenitiesSection({ onBook }: AmenitiesSectionProps = {}) {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('All');
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
@@ -55,7 +59,7 @@ export default function AmenitiesSection() {
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#85AB8B]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#336443]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1400px] mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,10 +71,10 @@ export default function AmenitiesSection() {
           <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-1.5 bg-[#f4f7f4] px-4 py-1.5 rounded-full shadow-xs border border-[#1f2a1d]/10 mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#85AB8B] animate-pulse" /> Official Hotel Facilities
           </span>
-          <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] tracking-tight mt-1">
+          <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] tracking-tight mt-1">
             Guest Privileges & Comforts
           </h2>
-          <p className="text-[#4b5b47] text-sm sm:text-base mt-3 max-w-xl mx-auto font-light leading-relaxed">
+          <p className="text-[#4b5b47] text-xs sm:text-sm mt-3 max-w-xl mx-auto font-light leading-relaxed">
             Experience uncompromised luxury with 16 official facilities including 24/7 power backup, in-room inverters, satellite TVs, and cozy Oriental dining.
           </p>
 
@@ -157,47 +161,6 @@ export default function AmenitiesSection() {
             ))}
           </motion.div>
         </AnimatePresence>
-
-        {/* Feature Banner: Banquet Hall & Oriental Dining */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="bg-[#1f2a1d] text-white rounded-[36px] sm:rounded-[48px] p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-white/10 group"
-        >
-          <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#85AB8B]/20 rounded-full blur-3xl pointer-events-none group-hover:bg-[#85AB8B]/30 transition-all duration-700" />
-          <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-[#336443]/30 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="max-w-2xl text-center lg:text-left">
-              <span className="inline-flex items-center gap-1.5 text-[#85AB8B] font-semibold text-xs uppercase tracking-widest bg-white/10 px-4 py-1 rounded-full border border-white/15 mb-4">
-                <Utensils className="w-3.5 h-3.5 text-[#85AB8B]" /> Signature In-House Dining & Banquets
-              </span>
-              <h3 className="text-2xl sm:text-4xl font-normal text-white mb-3">
-                Cozy Oriental Dining & Grand Banquet Hall
-              </h3>
-              <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light">
-                Indulge in authentic Indian and Chinese multi-cuisine divine flavours in our cozy Oriental interior dining room, or host lavish corporate banquets and weddings for 100 to 150 guests with dedicated catering and valet service.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
-              <a
-                href="#booking-form"
-                className="bg-[#85AB8B] hover:bg-[#6e9674] text-[#1f2a1d] font-bold text-xs py-4 px-8 rounded-full transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
-              >
-                Inquire Banquet & Events
-              </a>
-              <a
-                href="tel:+919119119101"
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs py-4 px-6 rounded-full transition-all border border-white/20 hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
-              >
-                Call Dining Desk
-              </a>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

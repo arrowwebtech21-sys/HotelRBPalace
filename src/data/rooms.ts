@@ -339,5 +339,63 @@ export const ROOMS: Room[] = [
         description: 'Room Only (No Meals Included)'
       }
     ]
+  },
+  {
+    id: 'banquet-hall',
+    name: 'Banquet Hall',
+    tag: 'Grand Event & Celebration Venue',
+    price: 'Custom Event Quote',
+    startingPrice: 'Custom Quote',
+    size: '100-150 Pax Capacity',
+    capacity: '100-150 Guests',
+    description:
+      'Grand air-conditioned luxury banquet hall venue perfect for hosting corporate conferences, weddings, executive retreats, and lavish social celebrations with full multi-cuisine catering and valet support.',
+    amenities: [
+      'Air Conditioned Grand Venue',
+      '100–150 Pax Guest Capacity',
+      'Stage & Audio-Visual Setup',
+      'In-House Multi-Cuisine Catering',
+      'Valet & Ample Parking Space',
+      '24/7 Power Backup (Generator & Inverter)',
+      'Dedicated Event Operations Team',
+      'Flexible Seating Configurations'
+    ],
+    image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200',
+    gallery: [
+      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200'
+    ],
+    features: [
+      { icon: Flower2, title: 'Grand Banquet Venue', desc: 'Spacious air-conditioned hall for corporate events, weddings, and conferences.' },
+      { icon: Utensils, title: 'Multi-Cuisine Catering', desc: 'Authentic Indian and Oriental delicacies served by expert chefs.' },
+      { icon: ShieldCheck, title: 'Full Event & Power Backup', desc: '24/7 power backup, stage lighting, sound setup, and valet service.' }
+    ],
+    plans: [
+      {
+        id: 'banquet-hall-rent-only',
+        code: 'EP',
+        title: 'Banquet Hall Venue Rental Only',
+        occupancy: '100-150 Pax Capacity',
+        price: 'Custom Event Quote',
+        description: 'Air-conditioned hall rental with basic stage setup & power backup'
+      },
+      {
+        id: 'banquet-hall-catering',
+        code: 'CP',
+        title: 'Banquet Hall + Multi-Cuisine Dining',
+        occupancy: '100-150 Pax Capacity',
+        price: 'Custom Package Quote',
+        description: 'Hall rental + stage setup + multi-cuisine Indian & Oriental buffet'
+      },
+      {
+        id: 'banquet-hall-full-package',
+        code: 'MAP',
+        title: 'Grand Event Package (Hall + Dining + Decor)',
+        occupancy: '100-150 Pax Capacity',
+        price: 'Tailored Event Package',
+        description: 'Full corporate/wedding package including venue, custom catering, decor, & valet'
+      }
+    ]
   }
 ];

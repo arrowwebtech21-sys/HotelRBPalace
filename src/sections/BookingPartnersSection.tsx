@@ -11,16 +11,16 @@ export default function BookingPartnersSection() {
 
   return (
     <section id="booking-partners" className="py-20 bg-[#f4f7f4]/60 border-t border-b border-[#1f2a1d]/10 relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-12">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-flex items-center gap-1.5 text-[#336443] font-semibold text-xs uppercase tracking-widest bg-white px-4 py-1.5 rounded-full border border-[#1f2a1d]/10 mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" /> Authorized Channel Partners
           </span>
-          <h2 className="text-3xl sm:text-5xl font-normal text-[#1f2a1d] tracking-tight leading-tight mt-1">
+          <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] tracking-tight leading-tight mt-1">
             Book On Your Preferred Platform
           </h2>
-          <p className="text-[#4b5b47] text-sm sm:text-base mt-3 font-light leading-relaxed">
+          <p className="text-[#4b5b47] text-xs sm:text-sm mt-3 font-light leading-relaxed">
             In addition to direct website reservations, Hotel RB Palace is officially listed across India's top Online Travel Agencies (OTAs), corporate travel management desks, and luxury booking portals.
           </p>
         </div>
