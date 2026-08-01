@@ -8,7 +8,7 @@ const highlights = [
   },
   {
     title: 'Grand Banquets & Multi-Cuisine Culinary Dining',
-    desc: 'Equipped with a grand air-conditioned banquet venue (100–150 Pax capacity) and a cozy Oriental interior dining room serving authentic Indian and Chinese delicacies.'
+    desc: 'Equipped with a grand air-conditioned banquet venue (250–300 Pax capacity) and a cozy Oriental interior dining room serving authentic Indian and Chinese delicacies.'
   }
 ];
 
@@ -92,7 +92,7 @@ export default function ExperienceSection() {
 
           <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] bg-[#2d3a2a] group">
             <img
-              src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200"
+              src="/images/experience_presidential.jpg"
               alt="Hotel RB Palace Suite Architecture"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

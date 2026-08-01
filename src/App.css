@@ -1,3 +1,11 @@
+/* Ultra HD Image Sharpness & Contrast Enhancement */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 /* Corporate Marquee Animations */
 @keyframes marquee-left {
   0% {

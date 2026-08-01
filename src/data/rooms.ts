@@ -22,11 +22,12 @@ export const ROOMS: Room[] = [
       'Free High-Speed Wi-Fi',
       '24/7 Room Service'
     ],
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/rooms/deluxe/deluxe_1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200'
+      '/images/rooms/deluxe/deluxe_1.jpg',
+      '/images/rooms/deluxe/deluxe_2.jpg',
+      '/images/rooms/deluxe/deluxe_3.jpg',
+      '/images/rooms/deluxe/deluxe_4.jpg'
     ],
     features: [
       { icon: Bath, title: '24hr Hot & Cold Water', desc: 'Attached modern bathroom with continuous hot and cold water supply.' },
@@ -96,11 +97,12 @@ export const ROOMS: Room[] = [
       'Free High-Speed Wi-Fi',
       'Safe Deposit Vault'
     ],
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/rooms/sp_deluxe/sp_deluxe_1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200'
+      '/images/rooms/sp_deluxe/sp_deluxe_1.jpg',
+      '/images/rooms/sp_deluxe/sp_deluxe_2.jpg',
+      '/images/rooms/sp_deluxe/sp_deluxe_3.jpg',
+      '/images/rooms/sp_deluxe/sp_deluxe_4.jpg'
     ],
     features: [
       { icon: Coffee, title: 'In-Room Electric Kettle', desc: 'Electric kettle with complimentary tea and coffee sachets.' },
@@ -170,11 +172,16 @@ export const ROOMS: Room[] = [
       'Laundry & Valet Service',
       '24/7 Front Desk & Travel Assistance'
     ],
-    image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200'
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_1.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_2.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_3.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_4.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_5.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_6.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_7.jpg',
+      '/images/rooms/ex_sp_deluxe/ex_sp_deluxe_8.jpg'
     ],
     features: [
       { icon: Utensils, title: 'Cozy Oriental Dining', desc: 'Multi-cuisine authentic Indian and Chinese dining.' },
@@ -241,18 +248,26 @@ export const ROOMS: Room[] = [
       'In-Room Refrigerator',
       'Electric Kettle & Coffee Sachets',
       'In-Room Inverter & Generator Backup',
-      'Banquet Hall Access (100-150 Pax)',
+      'Banquet Hall Access (250-300 Pax)',
       '24/7 Front Office & Travel Assistance'
     ],
-    image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/rooms/presidential/presidential_1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200'
+      '/images/rooms/presidential/presidential_1.jpg',
+      '/images/rooms/presidential/presidential_2.jpg',
+      '/images/rooms/presidential/presidential_3.jpg',
+      '/images/rooms/presidential/presidential_4.jpg',
+      '/images/rooms/presidential/presidential_5.jpg',
+      '/images/rooms/presidential/presidential_6.jpg',
+      '/images/rooms/presidential/presidential_7.jpg',
+      '/images/rooms/presidential/presidential_8.jpg',
+      '/images/rooms/presidential/presidential_9.jpg',
+      '/images/rooms/presidential/presidential_10.jpg',
+      '/images/rooms/presidential/presidential_11.jpg'
     ],
     features: [
       { icon: Crown, title: 'Imperial Living Quarters', desc: 'Spacious presidential suite salon with plush seating.' },
-      { icon: Flower2, title: 'Banquet Hall Access', desc: 'Air-conditioned banquet venue for 100-150 Pax events.' },
+      { icon: Flower2, title: 'Banquet Hall Access', desc: 'Air-conditioned banquet venue for 250-300 Pax events.' },
       { icon: ShieldCheck, title: 'Safe Deposit & Laundry', desc: 'Safe deposit box and laundry valet assistance.' }
     ],
     plans: [
@@ -318,11 +333,14 @@ export const ROOMS: Room[] = [
       'In-Room Inverter Backup',
       'Free High-Speed Wi-Fi'
     ],
-    image: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/rooms/family_suite/family_suite_1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200'
+      '/images/rooms/family_suite/family_suite_1.jpg',
+      '/images/rooms/family_suite/family_suite_2.jpg',
+      '/images/rooms/family_suite/family_suite_3.jpg',
+      '/images/rooms/family_suite/family_suite_4.jpg',
+      '/images/rooms/family_suite/family_suite_5.jpg',
+      '/images/rooms/family_suite/family_suite_6.jpg'
     ],
     features: [
       { icon: BedDouble, title: 'Multi-Bedroom Family Suite', desc: 'Generous multi-bedroom suite for families & groups.' },
@@ -346,13 +364,13 @@ export const ROOMS: Room[] = [
     tag: 'Grand Event & Celebration Venue',
     price: 'Custom Event Quote',
     startingPrice: 'Custom Quote',
-    size: '100-150 Pax Capacity',
-    capacity: '100-150 Guests',
+    size: '250-300 Pax Capacity',
+    capacity: '250-300 Guests',
     description:
       'Grand air-conditioned luxury banquet hall venue perfect for hosting corporate conferences, weddings, executive retreats, and lavish social celebrations with full multi-cuisine catering and valet support.',
     amenities: [
       'Air Conditioned Grand Venue',
-      '100–150 Pax Guest Capacity',
+      '250–300 Pax Guest Capacity',
       'Stage & Audio-Visual Setup',
       'In-House Multi-Cuisine Catering',
       'Valet & Ample Parking Space',
@@ -362,9 +380,16 @@ export const ROOMS: Room[] = [
     ],
     image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200',
     gallery: [
-      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200'
+      '/images/banquet/banquet_1.jpg',
+      '/images/banquet/banquet_2.jpg',
+      '/images/banquet/banquet_3.jpg',
+      '/images/banquet/banquet_4.jpg',
+      '/images/banquet/banquet_5.jpg',
+      '/images/banquet/banquet_6.jpg',
+      '/images/banquet/banquet_7.jpg',
+      '/images/banquet/banquet_8.jpg',
+      '/images/banquet/banquet_9.jpg',
+      '/images/banquet/banquet_10.jpg'
     ],
     features: [
       { icon: Flower2, title: 'Grand Banquet Venue', desc: 'Spacious air-conditioned hall for corporate events, weddings, and conferences.' },
@@ -376,7 +401,7 @@ export const ROOMS: Room[] = [
         id: 'banquet-hall-rent-only',
         code: 'EP',
         title: 'Banquet Hall Venue Rental Only',
-        occupancy: '100-150 Pax Capacity',
+        occupancy: '250-300 Pax Capacity',
         price: 'Custom Event Quote',
         description: 'Air-conditioned hall rental with basic stage setup & power backup'
       },
@@ -384,7 +409,7 @@ export const ROOMS: Room[] = [
         id: 'banquet-hall-catering',
         code: 'CP',
         title: 'Banquet Hall + Multi-Cuisine Dining',
-        occupancy: '100-150 Pax Capacity',
+        occupancy: '250-300 Pax Capacity',
         price: 'Custom Package Quote',
         description: 'Hall rental + stage setup + multi-cuisine Indian & Oriental buffet'
       },
@@ -392,7 +417,7 @@ export const ROOMS: Room[] = [
         id: 'banquet-hall-full-package',
         code: 'MAP',
         title: 'Grand Event Package (Hall + Dining + Decor)',
-        occupancy: '100-150 Pax Capacity',
+        occupancy: '250-300 Pax Capacity',
         price: 'Tailored Event Package',
         description: 'Full corporate/wedding package including venue, custom catering, decor, & valet'
       }

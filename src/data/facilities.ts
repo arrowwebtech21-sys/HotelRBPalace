@@ -128,9 +128,9 @@ export const OFFICIAL_FACILITIES: Facility[] = [
   {
     id: 'banquet-hall',
     icon: Building2,
-    title: 'Banquet Hall (100-150 Pax)',
+    title: 'Banquet Hall (250-300 Pax)',
     desc: 'Air-conditioned luxury banquet venue suited for hosting corporate conferences, weddings, and celebrations.',
-    badge: '100-150 Guests'
+    badge: '250-300 Guests'
   },
   {
     id: 'dining-cuisine',
