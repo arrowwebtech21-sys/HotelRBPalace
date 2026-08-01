@@ -15,6 +15,7 @@ import {
   Compass,
   Building2,
   Utensils,
+  Presentation,
   type LucideIcon
 } from 'lucide-react';
 
@@ -138,5 +139,12 @@ export const OFFICIAL_FACILITIES: Facility[] = [
     title: 'Oriental Cozy Dining (Indian & Chinese)',
     desc: 'Oriental interior dining venue serving authentic, divine-tasting Indian and Chinese multi-range cuisines.',
     badge: 'Multi-Cuisine'
+  },
+  {
+    id: 'conference-hall',
+    icon: Presentation,
+    title: 'Conference & Party Hall (100-120 Pax)',
+    desc: 'Executive air-conditioned conference venue with podium, projector, audio-visual sound, and ambient LED lighting.',
+    badge: '100-120 Guests'
   }
 ];
