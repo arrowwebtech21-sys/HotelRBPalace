@@ -11,8 +11,8 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
 
   return (
     <footer
-      className={`bg-[#1f2a1d] text-white/70 px-6 sm:px-12 border-t border-white/10 text-xs ${
-        variant === 'suite' ? 'py-10 mt-auto w-full' : 'py-14'
+      className={`bg-[#1f2a1d] text-white/70 px-4 sm:px-12 border-t border-white/10 text-xs ${
+        variant === 'suite' ? 'py-8 sm:py-10 mt-auto w-full' : 'py-10 sm:py-14'
       }`}
     >
       <div className="max-w-[1400px] mx-auto">

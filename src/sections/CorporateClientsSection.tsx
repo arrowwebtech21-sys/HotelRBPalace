@@ -39,8 +39,8 @@ export default function CorporateClientsSection() {
         className="relative w-full space-y-5 py-2 overflow-hidden"
       >
         {/* Left & Right Edge Gradient Masks */}
-        <div className="absolute top-0 bottom-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-[#fcfdfc] via-[#fcfdfc]/80 to-transparent z-20 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-[#fcfdfc] via-[#fcfdfc]/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-48 bg-gradient-to-r from-[#fcfdfc] via-[#fcfdfc]/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-48 bg-gradient-to-l from-[#fcfdfc] via-[#fcfdfc]/80 to-transparent z-20 pointer-events-none" />
 
         {/* Row 1: Leftward Infinite Marquee */}
         <div className="flex overflow-hidden relative">

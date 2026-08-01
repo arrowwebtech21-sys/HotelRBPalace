@@ -30,7 +30,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit, isSub
   const selectedPlan = roomPlans.find((p) => p.id === formData.planId) || roomPlans[0];
 
   return (
-    <section id="booking-form" className="py-24 px-6 sm:px-12 max-w-[1400px] mx-auto relative">
+    <section id="booking-form" className="py-14 sm:py-24 px-4 sm:px-12 max-w-[1400px] mx-auto relative">
       {/* Outer Floating Decorative Prop Badges */}
       <div className="absolute top-12 left-8 hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/90 border border-[#1f2a1d]/10 text-xs font-semibold text-[#1f2a1d] shadow-xl backdrop-blur-md -rotate-3 z-20 pointer-events-none">
         <Award className="w-4 h-4 text-[#85AB8B]" /> Guaranteed Best Direct Rate
@@ -39,7 +39,7 @@ export default function BookingFormSection({ formData, onChange, onSubmit, isSub
         <Star className="w-4 h-4 text-[#85AB8B]" /> 24/7 Desk & Event Desk
       </div>
 
-      <div className="bg-[#172215] text-white rounded-[36px] sm:rounded-[44px] p-8 sm:p-12 md:p-14 shadow-3xl relative overflow-hidden border border-[#85AB8B]/25">
+      <div className="bg-[#172215] text-white rounded-[28px] sm:rounded-[44px] p-5 sm:p-10 md:p-14 shadow-3xl relative overflow-hidden border border-[#85AB8B]/25">
         {/* Decorative Corner Filigree Lines */}
         <div className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-[#85AB8B]/30 rounded-tl-3xl pointer-events-none" />
         <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#85AB8B]/30 rounded-tr-3xl pointer-events-none" />

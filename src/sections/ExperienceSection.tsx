@@ -16,7 +16,7 @@ export default function ExperienceSection() {
   const [sectionRef, isVisible] = useOnScreen({ threshold: 0.15 });
 
   return (
-    <section id="experience" ref={sectionRef} className="py-28 px-6 sm:px-12 max-w-[1400px] mx-auto overflow-hidden">
+    <section id="experience" ref={sectionRef} className="py-14 sm:py-28 px-4 sm:px-12 max-w-[1400px] mx-auto overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div
           className={`transition-all duration-1000 ease-out transform ${
