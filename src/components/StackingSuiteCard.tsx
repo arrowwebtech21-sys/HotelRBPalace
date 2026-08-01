@@ -27,7 +27,9 @@ export default function StackingSuiteCard({
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
+  const isConference = room.id === 'conference-hall';
   const isBanquet = room.id === 'banquet-hall';
+  const isVenue = isConference || isBanquet;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -58,12 +60,20 @@ export default function StackingSuiteCard({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={`w-full max-w-[1360px] rounded-[36px] sm:rounded-[48px] p-6 sm:p-10 flex flex-col md:flex-row gap-8 h-full overflow-hidden preserve-3d group transition-all duration-500 relative ${
-          isBanquet
+          isConference
+            ? 'bg-gradient-to-br from-[#111f16] via-[#1a2d20] to-[#0d1711] text-white border border-[#85AB8B]/40 shadow-3xl'
+            : isBanquet
             ? 'bg-gradient-to-br from-[#1c1815] via-[#26201a] to-[#171412] text-white border border-[#c4a668]/35 shadow-3xl'
             : 'bg-white border border-[#1f2a1d]/10 text-[#1f2a1d] shadow-2xl hover:shadow-3xl'
         }`}
       >
-        {/* Banquet Hall Ambient Glow Props */}
+        {/* Venue Ambient Glow Props */}
+        {isConference && (
+          <>
+            <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#85AB8B]/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#336443]/35 rounded-full blur-3xl pointer-events-none" />
+          </>
+        )}
         {isBanquet && (
           <>
             <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#c4a668]/20 rounded-full blur-3xl pointer-events-none" />
@@ -82,12 +92,14 @@ export default function StackingSuiteCard({
 
           <span
             className={`absolute top-4 left-4 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm flex items-center gap-1.5 ${
-              isBanquet
+              isConference
+                ? 'bg-[#85AB8B] text-[#0d1711] border border-white/30 font-bold'
+                : isBanquet
                 ? 'bg-[#c4a668]/90 text-[#1c1815] border border-white/20'
                 : 'bg-white/90 text-[#1f2a1d]'
             }`}
           >
-            {isBanquet ? <Award className="w-3.5 h-3.5 text-[#1c1815]" /> : <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" />} {room.tag}
+            {isVenue ? <Award className={`w-3.5 h-3.5 ${isConference ? 'text-[#0d1711]' : 'text-[#1c1815]'}`} /> : <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" />} {room.tag}
           </span>
         </div>
 
@@ -97,7 +109,9 @@ export default function StackingSuiteCard({
             <div className="flex justify-between items-start mb-2">
               <span
                 className={`text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${
-                  isBanquet
+                  isConference
+                    ? 'text-[#85AB8B] bg-[#85AB8B]/20 border-[#85AB8B]/30'
+                    : isBanquet
                     ? 'text-[#f0d8a0] bg-[#c4a668]/20 border-[#c4a668]/30'
                     : 'text-[#85AB8B] bg-[#f4f7f4] border-[#1f2a1d]/5'
                 }`}
@@ -107,7 +121,9 @@ export default function StackingSuiteCard({
               <div className="text-right">
                 <span
                   className={`text-xl font-bold px-4 py-1.5 rounded-2xl shadow-xs block ${
-                    isBanquet
+                    isConference
+                      ? 'bg-[#85AB8B] text-[#0d1711] border border-[#a2cfa8]/40'
+                      : isBanquet
                       ? 'bg-[#c4a668] text-[#1c1815] border border-[#f0d8a0]/40'
                       : 'bg-white text-[#336443] border border-[#1f2a1d]/10'
                   }`}
@@ -119,7 +135,9 @@ export default function StackingSuiteCard({
 
             <h3
               className={`text-2xl sm:text-4xl font-normal mb-2 transition-colors duration-300 ${
-                isBanquet
+                isConference
+                  ? 'text-white group-hover:text-[#85AB8B]'
+                  : isBanquet
                   ? 'text-white group-hover:text-[#f0d8a0]'
                   : 'text-[#1f2a1d] group-hover:text-[#336443]'
               }`}
@@ -130,17 +148,19 @@ export default function StackingSuiteCard({
             {/* MEAL / VENUE PLANS BADGE */}
             <div
               className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-3.5 py-1 rounded-full border mb-4 ${
-                isBanquet
+                isConference
+                  ? 'text-[#a2cfa8] bg-[#85AB8B]/15 border-[#85AB8B]/25'
+                  : isBanquet
                   ? 'text-[#f0d8a0] bg-[#c4a668]/15 border-[#c4a668]/25'
                   : 'text-[#336443] bg-[#f4f7f4] border-[#1f2a1d]/5'
               }`}
             >
-              {isBanquet ? <Users className="w-3 h-3 text-[#c4a668]" /> : <Utensils className="w-3 h-3 text-[#85AB8B]" />} {planCount} Option Plan{planCount > 1 ? 's' : ''} {isBanquet ? '(Rental & Catering)' : '(EP, CP, MAP)'}
+              {isVenue ? <Users className={`w-3 h-3 ${isConference ? 'text-[#85AB8B]' : 'text-[#c4a668]'}`} /> : <Utensils className="w-3 h-3 text-[#85AB8B]" />} {planCount} Option Plan{planCount > 1 ? 's' : ''} {isVenue ? '(Rental, AV & Catering)' : '(EP, CP, MAP)'}
             </div>
 
             <p
               className={`text-sm sm:text-base leading-relaxed mb-4 font-light line-clamp-2 ${
-                isBanquet ? 'text-white/80' : 'text-[#4b5b47]'
+                isVenue ? 'text-white/85' : 'text-[#4b5b47]'
               }`}
             >
               {room.description}
@@ -151,12 +171,12 @@ export default function StackingSuiteCard({
                 <div
                   key={idx}
                   className={`flex items-center gap-2 text-xs font-medium p-2.5 rounded-xl border ${
-                    isBanquet
+                    isVenue
                       ? 'text-white/90 bg-white/10 border-white/15'
                       : 'text-[#1f2a1d] bg-[#f4f7f4]/80 border-[#1f2a1d]/5'
                   }`}
                 >
-                  <CheckCircle2 className={`w-4 h-4 shrink-0 ${isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> {item}
+                  <CheckCircle2 className={`w-4 h-4 shrink-0 ${isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> {item}
                 </div>
               ))}
             </div>
@@ -164,12 +184,12 @@ export default function StackingSuiteCard({
 
           <div
             className={`pt-4 border-t flex items-center justify-between gap-4 ${
-              isBanquet ? 'border-white/15' : 'border-gray-100'
+              isVenue ? 'border-white/15' : 'border-gray-100'
             }`}
           >
             <span
               className={`text-xs font-semibold uppercase tracking-wider ${
-                isBanquet ? 'text-[#c4a668]' : 'text-[#4b5b47]'
+                isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#4b5b47]'
               }`}
             >
               {room.size} • {room.capacity}
@@ -182,23 +202,25 @@ export default function StackingSuiteCard({
                   navigate(`/suite/${room.id}`);
                 }}
                 className={`py-3 px-5 rounded-2xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 ${
-                  isBanquet
+                  isVenue
                     ? 'border border-white/30 text-white hover:bg-white/15'
                     : 'border border-[#1f2a1d]/20 text-[#1f2a1d] hover:bg-gray-100 hover:border-[#336443]'
                 }`}
               >
-                <Maximize2 className={`w-3.5 h-3.5 ${isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> View Plans & Gallery
+                <Maximize2 className={`w-3.5 h-3.5 ${isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> View Plans & Gallery
               </button>
               <a
                 href="#booking-form"
                 onClick={() => onBook(room.id)}
                 className={`py-3 px-6 rounded-2xl text-xs font-bold transition-all text-center flex items-center gap-1 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer ${
-                  isBanquet
-                    ? 'bg-[#c4a668] hover:bg-[#b59654] text-[#1c1815] shadow-xl'
+                  isConference
+                    ? 'bg-[#85AB8B] hover:bg-[#6f9675] text-[#0d1711] shadow-xl font-bold'
+                    : isBanquet
+                    ? 'bg-[#c4a668] hover:bg-[#b59654] text-[#1c1815] shadow-xl font-bold'
                     : 'bg-[#3d5638] hover:bg-[#2d4228] text-white'
                 }`}
               >
-                {isBanquet ? 'Inquire Banquet' : 'Reserve'}
+                {isConference ? 'Inquire Hall' : isBanquet ? 'Inquire Banquet' : 'Reserve'}
               </a>
             </div>
           </div>

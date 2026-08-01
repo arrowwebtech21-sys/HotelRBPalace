@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, PhoneCall, Sparkles, X, Calendar, User, Mail, Phone, BedDouble } from 'lucide-react';
 import type { BookingEnquiry } from '../utils/booking';
-import { CHECK_IN_TIME, CHECK_OUT_TIME } from '../data/constants';
+import { CHECK_IN_TIME, CHECK_OUT_TIME, HOTEL_PHONE } from '../data/constants';
 
 type ThankYouModalProps = {
   isOpen: boolean;
@@ -120,10 +120,10 @@ export default function ThankYouModal({ isOpen, onClose, enquiryData }: ThankYou
                 <PhoneCall className="w-4 h-4 text-[#85AB8B]" /> Need Urgent Confirmation?
               </span>
               <a
-                href="tel:+919119119101"
+                href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
                 className="font-bold text-[#85AB8B] hover:underline"
               >
-                Call +91 9119119101
+                Call {HOTEL_PHONE}
               </a>
             </div>
 

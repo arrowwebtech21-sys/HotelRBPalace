@@ -359,6 +359,69 @@ export const ROOMS: Room[] = [
     ]
   },
   {
+    id: 'conference-hall',
+    name: 'Conference & Party Hall',
+    tag: 'Executive Meetings & Private Celebrations',
+    price: 'Custom Booking Quote',
+    startingPrice: 'Custom Quote',
+    size: '100-120 Pax Capacity',
+    capacity: '100-120 Guests',
+    description:
+      'State-of-the-art air-conditioned Conference & Party Hall venue featuring modern audio-visual podium, projector screen, ambient LED stage lighting, velvet banquet seating, and full multi-cuisine catering support for corporate meetings, seminars, birthdays, and private celebrations.',
+    amenities: [
+      'Air Conditioned Executive Hall',
+      'Projector & Big Screen Setup',
+      'Podium & Sound System',
+      'Ambient LED Stage Lighting',
+      'Multi-Cuisine Buffet Catering',
+      '24/7 Power Backup (Generator & Inverter)',
+      'Flexible Seating Configurations',
+      'Free High-Speed Wi-Fi'
+    ],
+    image: '/images/conference_hall/conference_1.jpg',
+    gallery: [
+      '/images/conference_hall/conference_1.jpg',
+      '/images/conference_hall/conference_2.jpg',
+      '/images/conference_hall/conference_3.jpg',
+      '/images/conference_hall/conference_4.jpg',
+      '/images/conference_hall/conference_5.jpg',
+      '/images/conference_hall/conference_6.jpg',
+      '/images/conference_hall/conference_7.jpg',
+      '/images/conference_hall/conference_8.jpg'
+    ],
+    features: [
+      { icon: Presentation, title: 'Corporate Conferences & Seminars', desc: 'Equipped with presentation projector, screen, podium, and sound setup.' },
+      { icon: PartyPopper, title: 'Private Parties & Celebrations', desc: 'Ideal venue for birthday parties, anniversaries, and family get-togethers.' },
+      { icon: ShieldCheck, title: 'Full Power & Catering Support', desc: '24/7 diesel generator power backup, valet, and in-house multi-cuisine buffet.' }
+    ],
+    plans: [
+      {
+        id: 'conference-hall-rent-only',
+        code: 'EP',
+        title: 'Conference / Party Hall Rental Only',
+        occupancy: '100-120 Pax Capacity',
+        price: 'Custom Event Quote',
+        description: 'Air-conditioned hall rental with projector, screen, podium, sound system & power backup'
+      },
+      {
+        id: 'conference-hall-catering',
+        code: 'CP',
+        title: 'Conference / Party Hall + Refreshments',
+        occupancy: '100-120 Pax Capacity',
+        price: 'Custom Package Quote',
+        description: 'Hall rental + projector & sound + high tea / breakfast / lunch buffet'
+      },
+      {
+        id: 'conference-hall-full-package',
+        code: 'MAP',
+        title: 'Full Corporate / Celebration Package',
+        occupancy: '100-120 Pax Capacity',
+        price: 'Tailored Event Package',
+        description: 'Full corporate/celebration package including venue, AV setup, stage lighting, custom dining & valet'
+      }
+    ]
+  },
+  {
     id: 'banquet-hall',
     name: 'Banquet Hall',
     tag: 'Grand Event & Celebration Venue',
@@ -420,69 +483,6 @@ export const ROOMS: Room[] = [
         occupancy: '250-300 Pax Capacity',
         price: 'Tailored Event Package',
         description: 'Full corporate/wedding package including venue, custom catering, decor, & valet'
-      }
-    ]
-  },
-  {
-    id: 'conference-hall',
-    name: 'Conference & Party Hall',
-    tag: 'Executive Meetings & Private Celebrations',
-    price: 'Custom Booking Quote',
-    startingPrice: 'Custom Quote',
-    size: '100-120 Pax Capacity',
-    capacity: '100-120 Guests',
-    description:
-      'State-of-the-art air-conditioned Conference & Party Hall venue featuring modern audio-visual podium, projector screen, ambient LED stage lighting, velvet banquet seating, and full multi-cuisine catering support for corporate meetings, seminars, birthdays, and private celebrations.',
-    amenities: [
-      'Air Conditioned Executive Hall',
-      'Projector & Big Screen Setup',
-      'Podium & Sound System',
-      'Ambient LED Stage Lighting',
-      'Multi-Cuisine Buffet Catering',
-      '24/7 Power Backup (Generator & Inverter)',
-      'Flexible Seating Configurations',
-      'Free High-Speed Wi-Fi'
-    ],
-    image: '/images/conference_hall/conference_1.jpg',
-    gallery: [
-      '/images/conference_hall/conference_1.jpg',
-      '/images/conference_hall/conference_2.jpg',
-      '/images/conference_hall/conference_3.jpg',
-      '/images/conference_hall/conference_4.jpg',
-      '/images/conference_hall/conference_5.jpg',
-      '/images/conference_hall/conference_6.jpg',
-      '/images/conference_hall/conference_7.jpg',
-      '/images/conference_hall/conference_8.jpg'
-    ],
-    features: [
-      { icon: Presentation, title: 'Corporate Conferences & Seminars', desc: 'Equipped with presentation projector, screen, podium, and sound setup.' },
-      { icon: PartyPopper, title: 'Private Parties & Celebrations', desc: 'Ideal venue for birthday parties, anniversaries, and family get-togethers.' },
-      { icon: ShieldCheck, title: 'Full Power & Catering Support', desc: '24/7 diesel generator power backup, valet, and in-house multi-cuisine buffet.' }
-    ],
-    plans: [
-      {
-        id: 'conference-hall-rent-only',
-        code: 'EP',
-        title: 'Conference / Party Hall Rental Only',
-        occupancy: '100-120 Pax Capacity',
-        price: 'Custom Event Quote',
-        description: 'Air-conditioned hall rental with projector, screen, podium, sound system & power backup'
-      },
-      {
-        id: 'conference-hall-catering',
-        code: 'CP',
-        title: 'Conference / Party Hall + Refreshments',
-        occupancy: '100-120 Pax Capacity',
-        price: 'Custom Package Quote',
-        description: 'Hall rental + projector & sound + high tea / breakfast / lunch buffet'
-      },
-      {
-        id: 'conference-hall-full-package',
-        code: 'MAP',
-        title: 'Full Corporate / Celebration Package',
-        occupancy: '100-120 Pax Capacity',
-        price: 'Tailored Event Package',
-        description: 'Full corporate/celebration package including venue, AV setup, stage lighting, custom dining & valet'
       }
     ]
   }
