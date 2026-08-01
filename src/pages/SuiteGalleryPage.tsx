@@ -120,15 +120,15 @@ export default function SuiteGalleryPage() {
     >
       <div className="flex-grow">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-[#1f2a1d]/10 px-6 sm:px-12 py-4 flex items-center justify-between shadow-xs">
+        <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-[#1f2a1d]/10 px-4 sm:px-12 py-3 sm:py-4 flex items-center justify-between shadow-xs gap-2">
           <button
             onClick={() => {
               navigate('/');
               setTimeout(() => window.scrollTo(0, 0), 100);
             }}
-            className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1f2a1d] hover:text-[#336443] transition-all bg-[#f4f7f4] hover:bg-[#e4eae4] px-5 py-2.5 rounded-full cursor-pointer border border-[#1f2a1d]/5 active:scale-95"
+            className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#1f2a1d] hover:text-[#336443] transition-all bg-[#f4f7f4] hover:bg-[#e4eae4] px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full cursor-pointer border border-[#1f2a1d]/5 active:scale-95 shrink-0"
           >
-            <ArrowLeft className="w-4 h-4 text-[#336443]" /> Back to Resort
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#336443]" /> <span className="hidden sm:inline">Back to Resort</span><span className="sm:hidden">Back</span>
           </button>
 
           <button
@@ -136,7 +136,7 @@ export default function SuiteGalleryPage() {
               navigate('/');
               setTimeout(() => window.scrollTo(0, 0), 100);
             }}
-            className="text-xl sm:text-2xl font-semibold tracking-tight text-[#1f2a1d] cursor-pointer hover:opacity-80 transition-opacity flex items-center gap-0.5"
+            className="text-base sm:text-2xl font-semibold tracking-tight text-[#1f2a1d] cursor-pointer hover:opacity-80 transition-opacity flex items-center gap-0.5 truncate"
             title="Return to Main Landing Page"
           >
             {BRAND_NAME}
@@ -145,9 +145,9 @@ export default function SuiteGalleryPage() {
 
           <a
             href="#room-booking"
-            className="bg-[#1f2a1d] hover:bg-[#2a3827] text-white text-xs font-semibold px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-xl hover:scale-105 active:scale-95"
+            className="bg-[#1f2a1d] hover:bg-[#2a3827] text-white text-[11px] sm:text-xs font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all shadow-md hover:shadow-xl hover:scale-105 active:scale-95 shrink-0"
           >
-            Reserve Suite
+            Reserve <span className="hidden sm:inline">Suite</span>
           </a>
         </header>
 
@@ -156,7 +156,7 @@ export default function SuiteGalleryPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-7xl mx-auto px-6 sm:px-12 pt-10 pb-8"
+          className="max-w-7xl mx-auto px-4 sm:px-12 pt-6 sm:pt-10 pb-6 sm:pb-8"
         >
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
             <div>

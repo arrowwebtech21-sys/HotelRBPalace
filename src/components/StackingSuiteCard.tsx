@@ -20,10 +20,10 @@ export default function StackingSuiteCard({
   onBook
 }: StackingSuiteCardProps) {
   const navigate = useNavigate();
-  const targetScale = 1 - (totalCards - 1 - index) * 0.04;
+  const targetScale = 1 - (totalCards - 1 - index) * 0.03;
   const cardProgress = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
 
-  // Micro 3D Motion State (Capped at max 0.4 degrees so buttons remain completely easy to click)
+  // Micro 3D Motion State (Capped at max 0.4 degrees)
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
@@ -50,8 +50,8 @@ export default function StackingSuiteCard({
 
   return (
     <div
-      className="sticky top-24 md:top-32 h-[80vh] flex items-center justify-center mb-10 pointer-events-auto z-10 perspective-1200"
-      style={{ top: `${96 + index * 28}px` }}
+      className="sticky top-20 sm:top-24 md:top-32 h-auto md:h-[82vh] min-h-fit flex items-center justify-center mb-8 sm:mb-10 pointer-events-auto z-10 perspective-1200"
+      style={{ top: `calc(72px + ${index * 14}px)` }}
     >
       <motion.div
         style={{ scale: cardProgress }}
@@ -59,7 +59,7 @@ export default function StackingSuiteCard({
         transition={{ type: 'spring', stiffness: 300, damping: 35 }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`w-full max-w-[1360px] rounded-[36px] sm:rounded-[48px] p-6 sm:p-10 flex flex-col md:flex-row gap-8 h-full overflow-hidden preserve-3d group transition-all duration-500 relative ${
+        className={`w-full max-w-[1360px] rounded-[28px] sm:rounded-[36px] md:rounded-[48px] p-4.5 sm:p-7 md:p-10 flex flex-col md:flex-row gap-5 sm:gap-8 h-full overflow-hidden preserve-3d group transition-all duration-500 relative ${
           isConference
             ? 'bg-gradient-to-br from-[#111f16] via-[#1a2d20] to-[#0d1711] text-white border border-[#85AB8B]/40 shadow-3xl'
             : isBanquet
@@ -70,19 +70,19 @@ export default function StackingSuiteCard({
         {/* Venue Ambient Glow Props */}
         {isConference && (
           <>
-            <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#85AB8B]/25 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#336443]/35 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 bg-[#85AB8B]/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-32 -left-32 w-72 sm:w-96 h-72 sm:h-96 bg-[#336443]/35 rounded-full blur-3xl pointer-events-none" />
           </>
         )}
         {isBanquet && (
           <>
-            <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#c4a668]/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#336443]/30 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 bg-[#c4a668]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-32 -left-32 w-72 sm:w-96 h-72 sm:h-96 bg-[#336443]/30 rounded-full blur-3xl pointer-events-none" />
           </>
         )}
 
-        {/* Suite / Venue Image Canvas with Zoom Effect */}
-        <div className="w-full md:w-1/2 h-64 md:h-full relative rounded-3xl overflow-hidden bg-gray-100 shrink-0">
+        {/* Suite / Venue Image Canvas */}
+        <div className="w-full md:w-1/2 h-48 sm:h-60 md:h-full relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-100 shrink-0">
           <img
             src={room.image}
             alt={room.name}
@@ -91,7 +91,7 @@ export default function StackingSuiteCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
           <span
-            className={`absolute top-4 left-4 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm flex items-center gap-1.5 ${
+            className={`absolute top-3 left-3 sm:top-4 sm:left-4 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold shadow-sm flex items-center gap-1 sm:gap-1.5 ${
               isConference
                 ? 'bg-[#85AB8B] text-[#0d1711] border border-white/30 font-bold'
                 : isBanquet
@@ -99,16 +99,16 @@ export default function StackingSuiteCard({
                 : 'bg-white/90 text-[#1f2a1d]'
             }`}
           >
-            {isVenue ? <Award className={`w-3.5 h-3.5 ${isConference ? 'text-[#0d1711]' : 'text-[#1c1815]'}`} /> : <Sparkles className="w-3.5 h-3.5 text-[#85AB8B]" />} {room.tag}
+            {isVenue ? <Award className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${isConference ? 'text-[#0d1711]' : 'text-[#1c1815]'}`} /> : <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#85AB8B]" />} {room.tag}
           </span>
         </div>
 
         {/* Suite / Venue Info Content */}
-        <div className="w-full md:w-1/2 flex flex-col justify-between py-2 relative z-10">
+        <div className="w-full md:w-1/2 flex flex-col justify-between py-1 sm:py-2 relative z-10">
           <div>
-            <div className="flex justify-between items-start mb-2">
+            <div className="flex justify-between items-center mb-2 gap-2">
               <span
-                className={`text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${
+                className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border ${
                   isConference
                     ? 'text-[#85AB8B] bg-[#85AB8B]/20 border-[#85AB8B]/30'
                     : isBanquet
@@ -120,7 +120,7 @@ export default function StackingSuiteCard({
               </span>
               <div className="text-right">
                 <span
-                  className={`text-xl font-bold px-4 py-1.5 rounded-2xl shadow-xs block ${
+                  className={`text-base sm:text-xl font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl shadow-xs block ${
                     isConference
                       ? 'bg-[#85AB8B] text-[#0d1711] border border-[#a2cfa8]/40'
                       : isBanquet
@@ -134,7 +134,7 @@ export default function StackingSuiteCard({
             </div>
 
             <h3
-              className={`text-2xl sm:text-4xl font-normal mb-2 transition-colors duration-300 ${
+              className={`text-xl sm:text-3xl md:text-4xl font-normal mb-1.5 sm:mb-2 transition-colors duration-300 ${
                 isConference
                   ? 'text-white group-hover:text-[#85AB8B]'
                   : isBanquet
@@ -147,7 +147,7 @@ export default function StackingSuiteCard({
 
             {/* MEAL / VENUE PLANS BADGE */}
             <div
-              className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-3.5 py-1 rounded-full border mb-4 ${
+              className={`inline-flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-semibold px-2.5 sm:px-3.5 py-0.5 sm:py-1 rounded-full border mb-2 sm:mb-4 ${
                 isConference
                   ? 'text-[#a2cfa8] bg-[#85AB8B]/15 border-[#85AB8B]/25'
                   : isBanquet
@@ -159,60 +159,60 @@ export default function StackingSuiteCard({
             </div>
 
             <p
-              className={`text-sm sm:text-base leading-relaxed mb-4 font-light line-clamp-2 ${
+              className={`text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4 font-light line-clamp-2 ${
                 isVenue ? 'text-white/85' : 'text-[#4b5b47]'
               }`}
             >
               {room.description}
             </p>
 
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
               {room.amenities.slice(0, 4).map((item, idx) => (
                 <div
                   key={idx}
-                  className={`flex items-center gap-2 text-xs font-medium p-2.5 rounded-xl border ${
+                  className={`flex items-center gap-2 text-[11px] sm:text-xs font-medium p-2 sm:p-2.5 rounded-xl border ${
                     isVenue
                       ? 'text-white/90 bg-white/10 border-white/15'
                       : 'text-[#1f2a1d] bg-[#f4f7f4]/80 border-[#1f2a1d]/5'
                   }`}
                 >
-                  <CheckCircle2 className={`w-4 h-4 shrink-0 ${isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> {item}
+                  <CheckCircle2 className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> {item}
                 </div>
               ))}
             </div>
           </div>
 
           <div
-            className={`pt-4 border-t flex items-center justify-between gap-4 ${
+            className={`pt-3 sm:pt-4 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 ${
               isVenue ? 'border-white/15' : 'border-gray-100'
             }`}
           >
             <span
-              className={`text-xs font-semibold uppercase tracking-wider ${
+              className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider ${
                 isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#4b5b47]'
               }`}
             >
               {room.size} • {room.capacity}
             </span>
-            <div className="flex gap-3 relative z-30">
+            <div className="flex w-full sm:w-auto gap-2.5 sm:gap-3 relative z-30">
               <button
                 type="button"
                 onClick={() => {
                   window.scrollTo(0, 0);
                   navigate(`/suite/${room.id}`);
                 }}
-                className={`py-3 px-5 rounded-2xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 ${
+                className={`flex-1 sm:flex-none py-2.5 sm:py-3 px-3.5 sm:px-5 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 ${
                   isVenue
                     ? 'border border-white/30 text-white hover:bg-white/15'
                     : 'border border-[#1f2a1d]/20 text-[#1f2a1d] hover:bg-gray-100 hover:border-[#336443]'
                 }`}
               >
-                <Maximize2 className={`w-3.5 h-3.5 ${isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> View Plans & Gallery
+                <Maximize2 className={`w-3.5 h-3.5 ${isConference ? 'text-[#85AB8B]' : isBanquet ? 'text-[#c4a668]' : 'text-[#336443]'}`} /> View Details
               </button>
               <a
                 href="#booking-form"
                 onClick={() => onBook(room.id)}
-                className={`py-3 px-6 rounded-2xl text-xs font-bold transition-all text-center flex items-center gap-1 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer ${
+                className={`flex-1 sm:flex-none py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs font-bold transition-all text-center flex items-center justify-center gap-1 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer ${
                   isConference
                     ? 'bg-[#85AB8B] hover:bg-[#6f9675] text-[#0d1711] shadow-xl font-bold'
                     : isBanquet
@@ -220,7 +220,7 @@ export default function StackingSuiteCard({
                     : 'bg-[#3d5638] hover:bg-[#2d4228] text-white'
                 }`}
               >
-                {isConference ? 'Inquire Hall' : isBanquet ? 'Inquire Banquet' : 'Reserve'}
+                {isConference ? 'Inquire Hall' : isBanquet ? 'Inquire Banquet' : 'Reserve Stay'}
               </a>
             </div>
           </div>
