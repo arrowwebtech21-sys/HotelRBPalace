@@ -1,19 +1,35 @@
 import { Menu, Phone, Sparkles, X, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BoomerangVideoBg from '../components/BoomerangVideoBg';
 import Magnet from '../components/Magnet';
 import { BG_VIDEO, BRAND_NAME, BRAND_SUFFIX, HOTEL_PHONE } from '../data/constants';
 
 const navLinksBeforeReserve = [
   { href: '#experience', label: 'Experience' },
-  { href: '#corporate-clients', label: 'Clients' },
   { href: '#suites', label: 'Suites & Tariffs' },
-  { href: '#booking-partners', label: 'OTA Partners' },
-  { href: '#amenities', label: 'Facilities' }
+  { href: '#restaurant', label: 'Restaurant', isRoute: false },
+  { href: '/tourist-places', label: 'Tourist Spots', isRoute: true },
+  { href: '/shuttle', label: 'Shuttle Cab', isRoute: true },
+  { href: '/careers', label: 'Careers', isRoute: true }
 ];
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavClick = (link: { href: string; label: string; isRoute?: boolean }) => {
+    if (link.isRoute) {
+      navigate(link.href);
+      window.scrollTo(0, 0);
+    } else {
+      const el = document.querySelector(link.href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setMenuOpen(false);
+  };
 
   return (
     <section className="relative w-full min-h-screen sm:h-screen overflow-hidden flex flex-col justify-between">
@@ -28,16 +44,16 @@ export default function HeroSection() {
           </span>
         </div>
 
-        {/* Floating Top Nav Pill (Ordered: Experience -> Clients -> Suites -> OTA Partners -> Facilities -> Reserve Stay -> Location) */}
+        {/* Floating Top Nav Pill */}
         <div className="hidden lg:flex items-center gap-1.5 bg-white/90 backdrop-blur-xl rounded-full px-5 py-2 shadow-xl border border-white/60">
           {navLinksBeforeReserve.map((link) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
-              className="text-xs px-3.5 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4] transition-all whitespace-nowrap"
+              onClick={() => handleNavClick(link)}
+              className="text-xs px-3 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4] transition-all whitespace-nowrap cursor-pointer"
             >
               {link.label}
-            </a>
+            </button>
           ))}
 
           {/* Reserve Stay Button BEFORE Location */}
@@ -53,7 +69,7 @@ export default function HeroSection() {
           {/* Location link AFTER Reserve Stay */}
           <a
             href="#location"
-            className="text-xs px-3.5 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4] transition-all whitespace-nowrap"
+            className="text-xs px-3 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f4f4] transition-all whitespace-nowrap"
           >
             Location
           </a>
@@ -80,14 +96,13 @@ export default function HeroSection() {
       {menuOpen && (
         <div className="lg:hidden absolute top-24 left-6 right-6 z-40 bg-white/95 backdrop-blur-xl rounded-3xl border border-white/60 shadow-2xl p-6 flex flex-col gap-2">
           {navLinksBeforeReserve.map((link) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-[#1f2a1d] px-4 py-3 rounded-2xl hover:bg-[#f4f7f4]"
+              onClick={() => handleNavClick(link)}
+              className="text-sm font-medium text-[#1f2a1d] px-4 py-3 rounded-2xl hover:bg-[#f4f7f4] text-left"
             >
               {link.label}
-            </a>
+            </button>
           ))}
           <a
             href="#booking-form"
@@ -114,14 +129,14 @@ export default function HeroSection() {
           Dholpur's Premier Address for <span className="text-[#85AB8B]">Luxury Suites</span> & Grand Events
         </h1>
         <p className="mt-3 sm:mt-5 text-white/90 text-xs sm:text-base md:text-lg font-light leading-relaxed max-w-3xl">
-          Conveniently located on the NH-3 Highway near Chopra Mode, Hotel RB Palace provides premium air-conditioned accommodations, executive banquet venues, and fine dining.
+          Conveniently located on the NH-3 Highway near Chopra Mode, Hotel RB Palace provides premium air-conditioned accommodations, executive banquet venues, fine dining, and dedicated 24/7 shuttle service.
         </p>
       </div>
 
       <div className="relative z-10 px-4 sm:px-10 md:px-14 pb-6 sm:pb-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
         <div className="flex items-center gap-2 sm:gap-3 text-white/90">
           <Sparkles className="w-4 h-4 text-[#85AB8B] shrink-0" />
-          <p className="text-[11px] sm:text-xs text-white/90 font-medium">NH-3 Highway, Dholpur • Banquets (250–300 Pax) • Conference Hall • Oriental Dining & 24/7 Power</p>
+          <p className="text-[11px] sm:text-xs text-white/90 font-medium">NH-3 Highway, Dholpur • Banquets (250–300 Pax) • Oriental Dining & 24/7 Shuttle</p>
         </div>
         <a
           href="#suites"

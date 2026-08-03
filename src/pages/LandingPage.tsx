@@ -9,6 +9,9 @@ import ExperienceSection from '../sections/ExperienceSection';
 import HeroSection from '../sections/HeroSection';
 import LocationSection from '../sections/LocationSection';
 import SuitesSection from '../sections/SuitesSection';
+import TouristSection from '../sections/TouristSection';
+import ShuttleTeaserSection from '../sections/ShuttleTeaserSection';
+import RestaurantTeaserSection from '../sections/RestaurantTeaserSection';
 import { ROOMS } from '../data/rooms';
 import { sendBookingEnquiry, getNextDayString, type BookingEnquiry } from '../utils/booking';
 
@@ -72,8 +75,6 @@ export default function LandingPage() {
     };
 
     setSubmittedEnquiry(enquiryPayload);
-
-    // Send background submission directly to ayushagrawal0881176@gmail.com
     await sendBookingEnquiry(enquiryPayload);
 
     setIsSubmitting(false);
@@ -95,6 +96,9 @@ export default function LandingPage() {
       />
       <BookingPartnersSection />
       <AmenitiesSection />
+      <RestaurantTeaserSection />
+      <TouristSection />
+      <ShuttleTeaserSection />
       <BookingFormSection
         formData={formData}
         onChange={handleInputChange}

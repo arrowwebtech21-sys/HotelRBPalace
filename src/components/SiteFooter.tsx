@@ -21,12 +21,8 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
           <div className="md:col-span-5">
             <button
               onClick={() => {
-                if (variant === 'suite') {
-                  navigate('/');
-                  setTimeout(() => window.scrollTo(0, 0), 100);
-                } else {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+                navigate('/');
+                window.scrollTo(0, 0);
               }}
               className="text-left cursor-pointer group mb-2 block"
               title="Return to Main Landing Page"
@@ -37,7 +33,7 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
               </span>
             </button>
             <p className="text-white/60 text-xs leading-relaxed max-w-sm mb-4">
-              Timeless hospitality, luxurious air-conditioned accommodations, 24/7 power backup, cozy Oriental dining, and grand banquet hosting in Dholpur, Rajasthan.
+              Timeless hospitality, luxurious air-conditioned accommodations, 24/7 power backup, cozy Oriental dining, airport shuttle service, and grand banquet hosting in Dholpur, Rajasthan.
             </p>
             <div className="flex flex-col gap-2 text-xs text-white/80">
               <span className="flex items-center gap-2">
@@ -63,12 +59,49 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
           <div className="md:col-span-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-3">Quick Navigation</h4>
             <ul className="space-y-2 text-xs text-white/60">
-              <li><a href="#experience" className="hover:text-white transition-colors">Resort Experience</a></li>
-              <li><a href="#corporate-clients" className="hover:text-white transition-colors">Corporate Partners</a></li>
-              <li><a href="#suites" className="hover:text-white transition-colors">5 Room Tiers & Meal Plans</a></li>
-              <li><a href="#booking-partners" className="hover:text-white transition-colors">OTA Booking Channels</a></li>
-              <li><a href="#amenities" className="hover:text-white transition-colors">Facilities & Banquets</a></li>
-              <li><a href="#location" className="hover:text-white transition-colors">Dholpur NH-3 Location</a></li>
+              <li>
+                <a
+                  href="/#restaurant"
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Royal Palace Dining
+                </a>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/tourist-places');
+                    window.scrollTo(0, 0);
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Nearby Tourist Spots (Distances)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/shuttle');
+                    window.scrollTo(0, 0);
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Airport & Cab Shuttle Booking
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/careers');
+                    window.scrollTo(0, 0);
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Job Careers & Openings
+                </button>
+              </li>
+              <li><a href="/#suites" className="hover:text-white transition-colors">5 Room Tiers & Tariffs</a></li>
+              <li><a href="/#amenities" className="hover:text-white transition-colors">Facilities & Banquets</a></li>
             </ul>
           </div>
 

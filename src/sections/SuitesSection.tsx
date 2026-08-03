@@ -20,7 +20,7 @@ export default function SuitesSection({ onBook }: SuitesSectionProps) {
         <span className="text-[#336443] font-semibold text-xs uppercase tracking-widest bg-white/80 px-3.5 py-1 rounded-full border border-[#1f2a1d]/5">
           Accommodations
         </span>
-        <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] mt-2">Suites & Private Villas</h2>
+        <h2 className="text-2xl sm:text-4xl font-normal text-[#1f2a1d] mt-2">Rooms & Suites</h2>
       </div>
 
       <div className="relative">
