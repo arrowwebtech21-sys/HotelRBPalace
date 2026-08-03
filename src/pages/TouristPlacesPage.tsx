@@ -3,6 +3,7 @@ import { ArrowLeft, Navigation, Clock, MapPin, ExternalLink, Car, Sparkles, Comp
 import { useNavigate } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
 import Magnet from '../components/Magnet';
+import BrandLogo from '../components/BrandLogo';
 import { TOURIST_SPOTS, type TouristSpot } from '../data/touristSpots';
 import { BRAND_NAME, BRAND_SUFFIX } from '../data/constants';
 
@@ -20,35 +21,32 @@ export default function TouristPlacesPage() {
   return (
     <div className="w-full bg-[#fcfdfc] text-[#1f2a1d] min-h-screen flex flex-col justify-between selection:bg-[#85AB8B] selection:text-white">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#172215]/95 backdrop-blur-md text-white border-b border-white/10 px-4 sm:px-12 py-4 shadow-md">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-          <button
-            onClick={() => {
-              navigate('/');
-              window.scrollTo(0, 0);
-            }}
-            className="flex items-center gap-2 text-white/80 hover:text-white transition-colors cursor-pointer group"
-          >
-            <ArrowLeft className="w-4 h-4 text-[#85AB8B] group-hover:-translate-x-1 transition-transform" />
-            <span className="text-xs sm:text-sm font-semibold tracking-wide">Return to Main Website</span>
-          </button>
+      <header className="sticky top-0 z-40 bg-[#172215]/95 backdrop-blur-md text-white border-b border-white/10 px-4 sm:px-12 py-3 sm:py-4 flex items-center justify-between shadow-md gap-4">
+        <button
+          onClick={() => {
+            navigate('/');
+            window.scrollTo(0, 0);
+          }}
+          className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white hover:text-white transition-all bg-white/10 hover:bg-white/20 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full cursor-pointer border border-white/15 active:scale-95 shrink-0 shadow-sm"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#85AB8B]" /> <span className="hidden sm:inline">Back to Home</span><span className="sm:hidden">Back</span>
+        </button>
 
-          <div className="flex items-center gap-2">
-            <span className="text-lg sm:text-xl font-bold tracking-tight text-white">
-              {BRAND_NAME} <span className="font-light text-[#85AB8B]">{BRAND_SUFFIX}</span>
-            </span>
-          </div>
+        <BrandLogo
+          variant="header"
+          size="sm"
+          onClick={() => {
+            navigate('/');
+            window.scrollTo(0, 0);
+          }}
+        />
 
-          <button
-            onClick={() => {
-              navigate('/shuttle');
-              window.scrollTo(0, 0);
-            }}
-            className="hidden sm:inline-flex items-center gap-1.5 bg-[#85AB8B] hover:bg-[#6e9674] text-[#172215] text-xs font-bold px-4 py-2 rounded-full transition-all cursor-pointer"
-          >
-            <Car className="w-3.5 h-3.5" /> Book Shuttle Cab
-          </button>
-        </div>
+        <a
+          href="#places-grid"
+          className="hidden sm:inline-flex items-center gap-1.5 bg-[#85AB8B] hover:bg-[#6e9674] text-[#172215] text-xs font-bold px-4 py-2 rounded-full transition-all shrink-0"
+        >
+          <Compass className="w-3.5 h-3.5" /> Explore Spots
+        </a>
       </header>
 
       {/* Hero Banner */}

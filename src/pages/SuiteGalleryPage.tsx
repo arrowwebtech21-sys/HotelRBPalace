@@ -23,6 +23,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
 import Magnet from '../components/Magnet';
+import BrandLogo from '../components/BrandLogo';
 import ThankYouModal from '../components/ThankYouModal';
 import { BRAND_NAME, BRAND_SUFFIX, CHECK_IN_TIME, CHECK_OUT_TIME } from '../data/constants';
 import { ROOMS } from '../data/rooms';
@@ -128,7 +129,7 @@ export default function SuiteGalleryPage() {
             }}
             className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#1f2a1d] hover:text-[#336443] transition-all bg-[#f4f7f4] hover:bg-[#e4eae4] px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full cursor-pointer border border-[#1f2a1d]/5 active:scale-95 shrink-0"
           >
-            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#336443]" /> <span className="hidden sm:inline">Back to Resort</span><span className="sm:hidden">Back</span>
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#336443]" /> <span className="hidden sm:inline">Back to Home</span><span className="sm:hidden">Back</span>
           </button>
 
           <button
@@ -250,8 +251,8 @@ export default function SuiteGalleryPage() {
                     setIsPaused(true);
                   }}
                   className={`relative shrink-0 rounded-2xl overflow-hidden aspect-[4/3] w-28 sm:w-36 transition-all duration-300 border-2 cursor-pointer ${activePhotoIdx === idx
-                      ? 'border-[#336443] shadow-lg scale-105'
-                      : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
+                    ? 'border-[#336443] shadow-lg scale-105'
+                    : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
                     }`}
                 >
                   <img src={imgUrl} alt={`${room.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
@@ -302,8 +303,8 @@ export default function SuiteGalleryPage() {
                 <button
                   onClick={() => setActiveTab('plans')}
                   className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${activeTab === 'plans'
-                      ? 'bg-[#1f2a1d] text-white shadow-md'
-                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
+                    ? 'bg-[#1f2a1d] text-white shadow-md'
+                    : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                     }`}
                 >
                   Tariff & Meal Plans ({roomPlans.length})
@@ -311,8 +312,8 @@ export default function SuiteGalleryPage() {
                 <button
                   onClick={() => setActiveTab('overview')}
                   className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${activeTab === 'overview'
-                      ? 'bg-[#1f2a1d] text-white shadow-md'
-                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
+                    ? 'bg-[#1f2a1d] text-white shadow-md'
+                    : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                     }`}
                 >
                   Overview & Layout
@@ -320,8 +321,8 @@ export default function SuiteGalleryPage() {
                 <button
                   onClick={() => setActiveTab('features')}
                   className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${activeTab === 'features'
-                      ? 'bg-[#1f2a1d] text-white shadow-md'
-                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
+                    ? 'bg-[#1f2a1d] text-white shadow-md'
+                    : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                     }`}
                 >
                   Room Highlights
@@ -329,8 +330,8 @@ export default function SuiteGalleryPage() {
                 <button
                   onClick={() => setActiveTab('details')}
                   className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${activeTab === 'details'
-                      ? 'bg-[#1f2a1d] text-white shadow-md'
-                      : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
+                    ? 'bg-[#1f2a1d] text-white shadow-md'
+                    : 'bg-[#f4f7f4] text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#e4eae4]'
                     }`}
                 >
                   Privileges & Policy
@@ -361,8 +362,8 @@ export default function SuiteGalleryPage() {
                           key={plan.id}
                           onClick={() => setSelectedPlanId(plan.id)}
                           className={`p-5 rounded-3xl border transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isSelected
-                              ? 'bg-white border-[#336443] shadow-lg ring-2 ring-[#336443]/20'
-                              : 'bg-white/60 border-[#1f2a1d]/10 hover:border-[#85AB8B] hover:bg-white'
+                            ? 'bg-white border-[#336443] shadow-lg ring-2 ring-[#336443]/20'
+                            : 'bg-white/60 border-[#1f2a1d]/10 hover:border-[#85AB8B] hover:bg-white'
                             }`}
                         >
                           <div className="flex items-start gap-3">

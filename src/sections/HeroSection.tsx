@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BoomerangVideoBg from '../components/BoomerangVideoBg';
 import Magnet from '../components/Magnet';
-import { BG_VIDEO, BRAND_NAME, BRAND_SUFFIX, HOTEL_PHONE } from '../data/constants';
+import BrandLogo from '../components/BrandLogo';
+import { BG_VIDEO, HOTEL_PHONE } from '../data/constants';
 
 const navLinksBeforeReserve = [
   { href: '#experience', label: 'Experience' },
@@ -37,15 +38,15 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 pointer-events-none" />
 
       <nav className="relative z-30 flex items-center justify-between px-6 sm:px-10 md:px-14 py-6">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-white drop-shadow-md">
-            {BRAND_NAME}
-            <span className="font-light text-[#85AB8B]"> {BRAND_SUFFIX}</span>
-          </span>
-        </div>
+        {/* Brand Logo Header (Left) */}
+        <BrandLogo
+          variant="header"
+          size="md"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
 
-        {/* Floating Top Nav Pill */}
-        <div className="hidden lg:flex items-center gap-1.5 bg-white/90 backdrop-blur-xl rounded-full px-5 py-2 shadow-xl border border-white/60">
+        {/* Floating Top Nav Pill — Absolutely Centered on Viewport */}
+        <div className="hidden lg:flex items-center gap-1 bg-white/90 backdrop-blur-xl rounded-full px-4 py-1.5 shadow-2xl border border-white/60 absolute left-1/2 -translate-x-1/2 z-40">
           {navLinksBeforeReserve.map((link) => (
             <button
               key={link.href}
@@ -60,7 +61,7 @@ export default function HeroSection() {
           <Magnet padding={80} strength={3}>
             <a
               href="#booking-form"
-              className="mx-1 bg-[#1f2a1d] hover:bg-[#2a3827] text-white text-xs font-semibold px-5 py-2 rounded-full transition-all shadow-md hover:shadow-xl inline-block whitespace-nowrap cursor-pointer"
+              className="mx-1 bg-[#1f2a1d] hover:bg-[#2a3827] text-white text-xs font-semibold px-4 py-1.5 rounded-full transition-all shadow-md hover:shadow-xl inline-block whitespace-nowrap cursor-pointer"
             >
               Reserve Stay
             </a>
@@ -69,13 +70,14 @@ export default function HeroSection() {
           {/* Location link AFTER Reserve Stay */}
           <a
             href="#location"
-            className="text-xs px-3 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f4f4] transition-all whitespace-nowrap"
+            className="text-xs px-3 py-1.5 rounded-full font-semibold text-[#4b5b47] hover:text-[#1f2a1d] hover:bg-[#f4f7f4] transition-all whitespace-nowrap"
           >
             Location
           </a>
         </div>
 
-        <div className="flex items-center gap-4 text-white">
+        {/* Right Action Button (Phone) */}
+        <div className="flex items-center gap-4 text-white shrink-0">
           <a
             href={`tel:${HOTEL_PHONE.replace(/\s+/g, '')}`}
             className="hidden sm:flex items-center gap-2 text-xs font-semibold hover:opacity-80 transition-opacity bg-black/30 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full"

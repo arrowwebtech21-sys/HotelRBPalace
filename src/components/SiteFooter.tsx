@@ -1,6 +1,7 @@
 import { ArrowLeft, ChevronRight, MapPin, Phone, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { BRAND_NAME, BRAND_SUFFIX, HOTEL_ADDRESS, HOTEL_PHONE, MANAGER_EMAIL } from '../data/constants';
+import BrandLogo from './BrandLogo';
+import { HOTEL_ADDRESS, HOTEL_PHONE, MANAGER_EMAIL } from '../data/constants';
 
 type SiteFooterProps = {
   variant?: 'landing' | 'suite';
@@ -19,19 +20,19 @@ export default function SiteFooter({ variant = 'landing' }: SiteFooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/10">
           {/* Brand & Tagline */}
           <div className="md:col-span-5">
-            <button
+            <BrandLogo
+              variant="header"
+              size="md"
+              className="mb-3"
               onClick={() => {
-                navigate('/');
-                window.scrollTo(0, 0);
+                if (variant === 'suite') {
+                  navigate('/');
+                  setTimeout(() => window.scrollTo(0, 0), 100);
+                } else {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
               }}
-              className="text-left cursor-pointer group mb-2 block"
-              title="Return to Main Landing Page"
-            >
-              <span className="text-2xl font-semibold tracking-tight text-white group-hover:text-[#85AB8B] transition-colors">
-                {BRAND_NAME}
-                <span className="font-light text-[#85AB8B]"> {BRAND_SUFFIX}</span>
-              </span>
-            </button>
+            />
             <p className="text-white/60 text-xs leading-relaxed max-w-sm mb-4">
               Timeless hospitality, luxurious air-conditioned accommodations, 24/7 power backup, cozy Oriental dining, airport shuttle service, and grand banquet hosting in Dholpur, Rajasthan.
             </p>
