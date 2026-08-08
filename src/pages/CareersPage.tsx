@@ -6,7 +6,7 @@ import Magnet from '../components/Magnet';
 import BrandLogo from '../components/BrandLogo';
 import { CAREER_LISTINGS, type JobListing } from '../data/careers';
 import { sendCareerApplication, type CareerApplication } from '../utils/booking';
-import { MANAGER_EMAIL } from '../data/constants';
+import { HR_EMAIL } from '../data/constants';
 
 export default function CareersPage() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function CareersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const departments = ['All', 'Front Office', 'Food & Beverage', 'Housekeeping', 'Management', 'Transport'];
+  const departments = ['All', 'Front Office', 'Food & Beverage', 'Housekeeping', 'Banquet & Events', 'Security & Support'];
 
   const filteredJobs = selectedDept === 'All'
     ? CAREER_LISTINGS
@@ -141,20 +141,20 @@ export default function CareersPage() {
           {/* Quick Metrics Badge */}
           <div className="bg-white/5 border border-white/15 p-6 rounded-3xl backdrop-blur-md grid grid-cols-2 gap-4 shrink-0 text-center sm:text-left">
             <div>
-              <span className="text-2xl font-bold text-[#85AB8B]">5+</span>
-              <p className="text-xs text-white/70">Department Tiers</p>
+              <span className="text-2xl font-bold text-[#85AB8B]">13</span>
+              <p className="text-xs text-white/70">Open Job Roles</p>
             </div>
             <div>
-              <span className="text-2xl font-bold text-white">24/7</span>
-              <p className="text-xs text-white/70">Support Operations</p>
+              <span className="text-2xl font-bold text-white">5</span>
+              <p className="text-xs text-white/70">Departments</p>
             </div>
             <div>
               <span className="text-2xl font-bold text-white">100%</span>
               <p className="text-xs text-white/70">Direct Hotel Role</p>
             </div>
             <div>
-              <span className="text-2xl font-bold text-[#85AB8B]">300 Pax</span>
-              <p className="text-xs text-white/70">Event Venue Scale</p>
+              <span className="text-2xl font-bold text-[#85AB8B]">24/7</span>
+              <p className="text-xs text-white/70">Staff Support</p>
             </div>
           </div>
         </div>
@@ -252,8 +252,8 @@ export default function CareersPage() {
                   <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">{job.description}</p>
 
                   <div className="pt-2 flex items-center justify-between text-xs font-semibold text-[#1f2a1d]">
-                    <span>Experience: <span className="text-[#336443]">{job.experience}</span></span>
-                    <span>Salary: <span className="text-[#336443]">{job.salaryRange}</span></span>
+                    <span>Experience Required: <span className="text-[#336443]">{job.experience}</span></span>
+                    <span className="text-[#336443] font-semibold bg-[#336443]/10 px-3 py-1 rounded-full">Competitive Compensation</span>
                   </div>
                 </div>
 
@@ -285,7 +285,7 @@ export default function CareersPage() {
               </span>
               <h2 className="text-2xl sm:text-4xl font-normal text-white">Apply for a Position</h2>
               <p className="text-white/70 text-xs sm:text-sm font-light">
-                Fill out your details below. Your application will be sent straight to our management desk at <span className="text-[#85AB8B] font-medium">{MANAGER_EMAIL}</span>.
+                Fill out your details below. Your application will be sent straight to our HR recruitment desk at <span className="text-[#85AB8B] font-medium">{HR_EMAIL}</span>.
               </p>
             </div>
 
@@ -495,8 +495,8 @@ export default function CareersPage() {
               </div>
 
               <div className="p-3 bg-[#f4f7f4] rounded-2xl flex items-center justify-between text-xs font-bold text-[#1f2a1d]">
-                <span>Offered Salary: <span className="text-[#336443]">{activeJobModal.salaryRange}</span></span>
-                <span>Experience: <span className="text-[#336443]">{activeJobModal.experience}</span></span>
+                <span>Employment Type: <span className="text-[#336443]">{activeJobModal.type}</span></span>
+                <span>Experience Required: <span className="text-[#336443]">{activeJobModal.experience}</span></span>
               </div>
             </div>
 

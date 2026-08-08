@@ -13,3 +13,8 @@
   - `05_Memory_and_Decisions/08_Architecture_Decisions_Log_ADR.md`: Log new architectural choices as ADRs.
   - `05_Memory_and_Decisions/09_Development_History_and_Milestones.md`: Maintain the continuous development timeline.
   - `06_Future_Roadmap/11_AI_Agent_Fast_Onboarding.md`: Keep file cheatsheets and verification commands accurate.
+
+## 🛑 Strict Git Branch & Workflow Directive
+
+- **Branch Constraint**: Perform all code edits and development exclusively within feature branch `rb-palace-b3`.
+- **No Automatic Commit / Push / Merge**: DO NOT run `git commit`, `git push`, or `git checkout main / git merge` automatically. The user will manually review, commit, push, and merge all changes.

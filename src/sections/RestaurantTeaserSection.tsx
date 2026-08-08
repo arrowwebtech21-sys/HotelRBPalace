@@ -76,26 +76,26 @@ export default function RestaurantTeaserSection() {
 
               <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
                 <div className="flex justify-between items-center font-semibold text-white">
-                  <span>CP Plan (Continental)</span>
-                  <span className="text-[#85AB8B] text-[11px]">Breakfast Included</span>
+                  <span>CP Plan (Breakfast)</span>
+                  <span className="text-[#85AB8B] text-[11px] font-bold">₹320/- + 5% GST</span>
                 </div>
-                <p className="text-[#85AB8B] text-[11px] mt-0.5">Includes morning breakfast & tea/coffee</p>
+                <p className="text-[#85AB8B] text-[11px] mt-0.5">₹320 + 5% GST per Pax for morning breakfast & hot chai/coffee</p>
               </div>
 
               <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
                 <div className="flex justify-between items-center font-semibold text-white">
-                  <span>MAP Plan (Modified)</span>
-                  <span className="text-[#85AB8B] text-[11px]">Half Board</span>
+                  <span>MAP Plan (Half Board)</span>
+                  <span className="text-[#85AB8B] text-[11px] font-bold">₹450/- + 5% GST</span>
                 </div>
-                <p className="text-[#85AB8B] text-[11px] mt-0.5">Includes daily Breakfast + Lunch or Dinner</p>
+                <p className="text-[#85AB8B] text-[11px] mt-0.5">₹450 + 5% GST per Pax for One Major Meal (Lunch or Dinner)</p>
               </div>
 
               <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
                 <div className="flex justify-between items-center font-semibold text-white">
-                  <span>AP Plan (American)</span>
-                  <span className="text-[#85AB8B] text-[11px]">Full Board</span>
+                  <span>AP Plan (Full Board)</span>
+                  <span className="text-[#85AB8B] text-[11px] font-bold">All 3 Meals</span>
                 </div>
-                <p className="text-[#85AB8B] text-[11px] mt-0.5">Includes all 3 daily meals in-house</p>
+                <p className="text-[#85AB8B] text-[11px] mt-0.5">Includes Breakfast + Lunch + Dinner (320 + 450 + 450 + 5% GST)</p>
               </div>
             </div>
 
