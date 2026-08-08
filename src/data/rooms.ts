@@ -8,7 +8,7 @@ export const ROOMS: Room[] = [
     tag: 'Courtyard & City View',
     price: '₹2,000 + GST / night',
     startingPrice: '₹2,000 + GST',
-    size: '350 sq ft',
+    size: '180 sq ft',
     capacity: '2 Guests',
     description:
       'Luxurious air conditioned Deluxe Room featuring attached bathroom with 24hr hot and cold water, LED TV with satellite channels, in-room refrigerator, electric kettle with coffee sachets, in-room inverter backup, and free high-speed Wi-Fi.',
@@ -83,7 +83,7 @@ export const ROOMS: Room[] = [
     tag: 'Heritage Highway View',
     price: '₹2,200 + GST / night',
     startingPrice: '₹2,200 + GST',
-    size: '420 sq ft',
+    size: '270 sq ft',
     capacity: '2 Adults, 1 Child',
     description:
       'Elevated SP. Deluxe Room offering additional spatial layout, air conditioning, satellite LED TV, mini refrigerator, electric kettle, 24hr hot & cold water, safe deposit box, and round-the-clock room service.',
@@ -158,7 +158,7 @@ export const ROOMS: Room[] = [
     tag: 'Executive Horizon View',
     price: '₹2,499 + GST / night',
     startingPrice: '₹2,499 + GST',
-    size: '500 sq ft',
+    size: '400 sq ft',
     capacity: '2 Adults, 2 Children',
     description:
       'Premium EX. SP. Deluxe Room with spacious lounge area, satellite LED TV, in-room refrigerator, electric kettle, 24hr hot & cold water, laundry service, and access to cozy Oriental dining room.',
@@ -237,7 +237,7 @@ export const ROOMS: Room[] = [
     tag: 'Panoramic Grand View',
     price: '₹3,000 + GST / night',
     startingPrice: '₹3,000 + GST',
-    size: '650 sq ft',
+    size: '400 sq ft',
     capacity: '4 Guests',
     description:
       'Grand Presidential Suite with luxury salon quarters, air conditioning, 24hr hot & cold water bath, satellite LED TV, in-room refrigerator, electric kettle, in-room inverter, safe deposit, and banquet hall access.',
@@ -319,7 +319,7 @@ export const ROOMS: Room[] = [
     tag: 'Grand Family Room View',
     price: '₹3,500 + GST / night',
     startingPrice: '₹3,500 + GST',
-    size: '800 sq ft',
+    size: '500 sq ft',
     capacity: '6 Guests',
     description:
       'Spacious multi-bedroom Family Suite Room designed for group stays and families. Equipped with air conditioning, satellite LED TV, in-room refrigerator, kettle with coffee sachets, inverter backup, and 24/7 room service.',
@@ -441,8 +441,9 @@ export const ROOMS: Room[] = [
       'Dedicated Event Operations Team',
       'Flexible Seating Configurations'
     ],
-    image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/banquet/banquet_main_cover.jpg',
     gallery: [
+      '/images/banquet/banquet_main_cover.jpg',
       '/images/banquet/banquet_1.jpg',
       '/images/banquet/banquet_2.jpg',
       '/images/banquet/banquet_3.jpg',
