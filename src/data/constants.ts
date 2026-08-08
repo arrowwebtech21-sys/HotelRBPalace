@@ -1,6 +1,7 @@
 export const BG_VIDEO = '/videos/hero_hall_bg.mp4';
 
 export const MANAGER_EMAIL = 'hotelrbpalace@gmail.com';
+export const HR_EMAIL = 'hotelrbpalace.hr@gmail.com';
 
 export const BRAND_NAME = 'HOTEL RB';
 export const BRAND_SUFFIX = 'PALACE';

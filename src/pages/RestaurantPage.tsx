@@ -170,32 +170,41 @@ export default function RestaurantPage() {
       <main className="max-w-[1400px] mx-auto px-4 sm:px-12 py-12 sm:py-20 w-full space-y-16">
         {/* Tariff & Meal Plan Inclusions Bar */}
         <section className="bg-[#f4f7f4] rounded-3xl p-6 sm:p-8 border border-[#1f2a1d]/10 grid grid-cols-1 md:grid-cols-4 gap-6 text-xs text-[#1f2a1d]">
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
               <Award className="w-4 h-4" /> EP Plan (Room Only)
             </span>
-            <p className="text-gray-600">European Plan - Order food a-la-carte from our in-room dining menu at standard rates.</p>
+            <p className="text-gray-600">European Plan — Order food a-la-carte from our in-room dining menu at standard rates.</p>
           </div>
 
-          <div className="space-y-1">
-            <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
-              <Coffee className="w-4 h-4" /> CP Plan (Continental)
-            </span>
-            <p className="text-gray-600">Bed & Breakfast - Includes complimentary hot morning breakfast & chai in the restaurant.</p>
+          <div className="space-y-1.5">
+            <div className="flex justify-between items-center">
+              <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
+                <Coffee className="w-4 h-4" /> CP Plan (Breakfast)
+              </span>
+              <span className="bg-[#336443]/10 text-[#336443] font-bold px-2 py-0.5 rounded-md text-[11px]">₹320 + 5% GST</span>
+            </div>
+            <p className="text-gray-600"><strong className="text-[#336443]">₹320/- + 5% GST per Pax</strong> — Includes hot morning breakfast buffet & chai/coffee in the dining room.</p>
           </div>
 
-          <div className="space-y-1">
-            <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
-              <Utensils className="w-4 h-4" /> MAP Plan (Modified)
-            </span>
-            <p className="text-gray-600">Half Board - Includes daily morning breakfast + choice of Lunch or Dinner buffet/thali.</p>
+          <div className="space-y-1.5">
+            <div className="flex justify-between items-center">
+              <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
+                <Utensils className="w-4 h-4" /> MAP Plan (Half Board)
+              </span>
+              <span className="bg-[#336443]/10 text-[#336443] font-bold px-2 py-0.5 rounded-md text-[11px]">₹450 + 5% GST</span>
+            </div>
+            <p className="text-gray-600"><strong className="text-[#336443]">₹450/- + 5% GST per Pax</strong> — Includes choice of One Major Meal (Lunch or Dinner) per guest.</p>
           </div>
 
-          <div className="space-y-1">
-            <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4" /> AP Plan (American)
-            </span>
-            <p className="text-gray-600">Full Board - Includes all 3 daily meals (Breakfast, Lunch & Dinner) prepared fresh.</p>
+          <div className="space-y-1.5">
+            <div className="flex justify-between items-center">
+              <span className="font-bold uppercase tracking-wider text-[#336443] flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4" /> AP Plan (Full Board)
+              </span>
+              <span className="bg-[#336443]/10 text-[#336443] font-bold px-2 py-0.5 rounded-md text-[11px]">Full Meal Plan</span>
+            </div>
+            <p className="text-gray-600">Full Board — Includes Breakfast (₹320) + Both Major Meals (Lunch & Dinner at ₹450 each) + 5% GST.</p>
           </div>
         </section>
 

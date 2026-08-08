@@ -1,4 +1,4 @@
-import { HOTEL_ADDRESS, MANAGER_EMAIL } from '../data/constants';
+import { HOTEL_ADDRESS, MANAGER_EMAIL, HR_EMAIL } from '../data/constants';
 
 export type BookingEnquiry = {
   name: string;
@@ -114,7 +114,7 @@ export async function sendBookingEnquiry(enquiry: BookingEnquiry): Promise<{ suc
 
 export async function sendCareerApplication(app: CareerApplication): Promise<{ success: boolean }> {
   try {
-    const response = await fetch(`https://formsubmit.co/ajax/${MANAGER_EMAIL}`, {
+    const response = await fetch(`https://formsubmit.co/ajax/${HR_EMAIL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
