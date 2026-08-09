@@ -246,7 +246,6 @@ export default function ShuttlePage() {
                 <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-gray-100">
                   <div className="text-left sm:text-right text-xs">
                     <p className="font-bold text-[#1f2a1d]">Sedan: <span className="text-[#336443]">{route.fixedRateSedan}</span></p>
-                    <p className="text-gray-500 text-[11px]">SUV: <span className="font-semibold text-gray-700">{route.fixedRateSUV}</span></p>
                   </div>
                   <button
                     onClick={() => handleRouteQuickBook(route.routeName, route.destinationType)}
