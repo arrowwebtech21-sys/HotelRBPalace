@@ -73,8 +73,8 @@ export const POPULAR_SHUTTLE_ROUTES: ShuttleRoutePackage[] = [
     popular: true
   },
   {
-    id: 'dholpur-dharshan',
-    routeName: 'Dholpur Dharshan',
+    id: 'dholpur-darshan',
+    routeName: 'Dholpur Darshan',
     destinationType: 'Tourist Spot',
     distanceOneWay: 'upto 50 km',
     estimatedTime: '5-6 hours',
